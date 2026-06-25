@@ -5,6 +5,7 @@
 >
 > **Eixos da apresentação:** Resultados · Case técnico · Lições e melhorias.
 > Regra: só conteúdo **real**, vivido na obra. Nada inventado.
+> 📸 **Fotos:** há registro fotográfico de cada fase da obra — serão inseridas no fechamento.
 
 ---
 
@@ -35,7 +36,11 @@
 > os desafios e as soluções. (Esqueleto sugerido — ajuste/renomeie as fases conforme a obra.)
 
 ### 2.1 Terreno e fundação
-_a preencher_
+- **Terreno:** sem grandes dificuldades.
+- **Fundação:** dimensionada com base no estudo do terreno (sondagem) e na distribuição de cargas da casa.
+- **Melhoria identificada:** um aterro com **compactação controlada** provavelmente teria reduzido o custo da fundação em **20–30%** (ver Lição #2).
+
+_Fotos: (referência a inserir)_
 
 ### 2.2 Estrutura steel frame (montagem dos painéis)
 _a preencher_
@@ -87,4 +92,5 @@ _a preencher_
 | # | Categoria | Situação | Causa raiz | Lição / melhoria proposta | Impacto |
 |---|-----------|----------|------------|----------------------------|---------|
 | 1 | Impermeabilização (steel frame) | Contrapiso fino (em pontos só ~2 cm sobre o Plywood) e ralos lineares colados na parede dificultaram a impermeabilização e o teste de estanqueidade dos banheiros. | Detalhamento das áreas molhadas no steel frame não previu espessura de contrapiso e afastamento de ralo suficientes para a vedação. | Em área molhada de steel frame, **prever desde o projeto/detalhamento**: espessura de contrapiso adequada, afastamento do ralo em relação à parede e travamento de ralo/encanamento contra movimentação. **Melhoria principal: adotar um rebaixo de pelo menos ~10 cm nas áreas molhadas nos próximos projetos de steel frame**, facilitando a execução e evitando problemas de impermeabilização. Especificar aditivo impermeabilizante + argamassa polimérica flexível com fibras. | Retrabalho (refazer pontos) + compra de aditivo — porém resolvido |
+| 2 | Fundação / Custo | A fundação foi dimensionada pelo estudo do terreno e pela distribuição de cargas, sem grandes problemas. | Não foi avaliada a alternativa de preparar o terreno antes (aterro compactado) para reduzir a solicitação e o custo da fundação. | Nos próximos projetos, avaliar executar **aterro com compactação controlada** para melhorar a capacidade de suporte do solo e baratear a fundação. | Economia estimada de **20–30%** no custo da fundação |
 |   |           |          |            |                            |         |
