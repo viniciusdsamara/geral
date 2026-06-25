@@ -31,15 +31,27 @@
 - **Escopo / porte:** ~490 m² · steel frame · 12 frentes · pico de 18 colaboradores em 6 frentes simultâneas
 
 ## 2. A obra como case técnico
-> A construção em si: etapas, soluções de alvenaria, problemas resolvidos, fotos.
+> A construção em si: etapas, soluções, problemas resolvidos, fotos.
 
-| Etapa / frente | O que foi feito | Solução / destaque técnico | Foto (ref) |
-|---|---|---|---|
-|  |  |  |  |
+### Case 1 — Impermeabilização e estanqueidade dos banheiros (steel frame)
+**Desafio:** garantir a impermeabilização dos banheiros e passar no teste de estanqueidade com um contrapiso muito fino — em alguns pontos apoiado praticamente só sobre o **Plywood** (a madeira que estrutura o pavimento superior), com apenas ~2 cm de contrapiso para receber o revestimento de chukun.
+
+**Por que era difícil (próprio do steel frame):** piso fino e sujeito a movimentação; os **ralos lineares ficavam muito próximos à parede**, o que dificultava a vedação no encontro piso/parede e ao redor do ralo.
+
+**Solução técnica:**
+- **Caixas de concreto sob o Plywood** em pontos críticos, para travar a movimentação dos ralos e do encanamento.
+- **Aditivo impermeabilizante no concreto**.
+- **Refazimento de pontos estratégicos** para sanar de vez a vedação.
+- Acabamento com **argamassas poliméricas flexíveis com fibras** (acompanham a movimentação sem trincar).
+
+**Resultado:** impermeabilização sanada e estanqueidade resolvida nos banheiros.
+
+_Fotos: (referência a inserir)_
 
 ## 3. Lições aprendidas e melhorias
 > O que aprendi conduzindo a M&A até agora e o que proponho mudar.
 
 | # | Categoria | Situação | Causa raiz | Lição / melhoria proposta | Impacto |
 |---|-----------|----------|------------|----------------------------|---------|
+| 1 | Impermeabilização (steel frame) | Contrapiso fino (em pontos só ~2 cm sobre o Plywood) e ralos lineares colados na parede dificultaram a impermeabilização e o teste de estanqueidade dos banheiros. | Detalhamento das áreas molhadas no steel frame não previu espessura de contrapiso e afastamento de ralo suficientes para a vedação. | Em área molhada de steel frame, **prever desde o projeto/detalhamento**: espessura de contrapiso adequada, afastamento do ralo em relação à parede e travamento de ralo/encanamento contra movimentação. Especificar aditivo impermeabilizante + argamassa polimérica flexível com fibras. | Retrabalho (refazer pontos) + compra de aditivo — porém resolvido |
 |   |           |          |            |                            |         |
