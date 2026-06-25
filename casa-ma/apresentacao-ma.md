@@ -47,6 +47,7 @@ _Fotos: (referência a inserir)_
 ### 2.2 Estrutura steel frame (montagem dos painéis)
 - **Montagem muito rápida — a casa toda foi levantada em 56 dias.**
 - Painéis fixados nas **baldrames no nível do piso acabado** (um pouco acima do contrapiso) para não sofrerem esforços laterais.
+- **Proteção contra corrosão:** todo painel fixado em concreto ou em contato com cimento foi isolado com **manta asfáltica aluminizada**, evitando corrosão química do aço.
 - **Controle de parafusamento com 2 sprays** (destaque técnico): verde = parafuso conferido/ok; vermelho = falta de parafuso. Método visual simples e eficaz para garantir a conferência.
 - Esquadro e prumo ajustados conforme subia de pavimento.
 - **Atenção (ver Lição #3):** com a carga alta do pavimento superior (telhas de cerâmica aparente, ~12 ton), algumas paredes saíram do prumo ao iniciar a cobertura.
