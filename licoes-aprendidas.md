@@ -13,10 +13,10 @@
 
 ## Registro
 
-| # | Data | Obra | Categoria | O que aconteceu | Causa raiz | Lição / O que fazer diferente | Impacto (R$ / prazo) | Status |
-|---|------|------|-----------|-----------------|------------|-------------------------------|----------------------|--------|
-| 1 | _ex (apague)_ | RL | Suprimentos | _exemplo de formato: material chegou fora de especificação_ | _pedido sem conferência do projeto_ | _checar projeto antes de fechar pedido_ | _3 dias de atraso_ | Aplicar na M&A |
-|   |      |      |           |                 |            |                               |                      |        |
+| # | Data | Obra | Categoria | O que aconteceu | Causa raiz | Lição / O que fazer diferente | Impacto | Status |
+|---|------|------|-----------|-----------------|------------|-------------------------------|---------|--------|
+| 1 |  | RL | Cliente / Comunicação | Cliente extremamente exigente — questionava tudo, nada estava bom, sempre exigia uma resposta à altura. Não aceitava meias palavras nem enrolação. | Perfil do cliente: muito exigente e questionador; cobrava domínio e propriedade nas respostas. | (a) Cuidado redobrado com o que se fala — nada de achismo ou enrolação. (b) Dominar tudo o que acontece na obra: questionar e entender cada detalhe, pra sempre responder com segurança e propriedade. | Credibilidade / relação com o cliente | Aprendido |
+|   |      |      |           |                 |            |                               |         |        |
 
 ---
 
