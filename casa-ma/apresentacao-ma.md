@@ -67,7 +67,13 @@ Sequência executada:
 _Fotos: (referência a inserir)_
 
 ### 2.4 Cobertura
-_a preencher_
+- **Madeiramento metálico** (estrutura metálica) — escolha para **não misturar sistemas construtivos**, mantendo coerência com o steel frame.
+- **Telhas Maristela, estilo colonial (capa/canal), ~4 kg cada.** Instalação extremamente trabalhosa: cada telha **amarrada individualmente** para evitar movimentação. Etapa demorada.
+- **Beiral em madeira maciça (garapa).**
+- **Maior desafio — compatibilização estrutural × arquitetônico:** foi preciso **aumentar a testeira do beiral** para "esconder" a estrutura do madeiramento metálico (ver Lição #6).
+- Carga elevada da cobertura (~12 ton) → reforça a **Lição #3** (escoramento do térreo).
+
+_Fotos: (referência a inserir)_
 
 ### 2.5 Fechamentos e vedações
 _a preencher_
@@ -114,4 +120,5 @@ _a preencher_
 | 3 | Estrutura / Escoramento | Algumas paredes saíram do prumo ao iniciar a cobertura. | Carga alta no pavimento superior (~12 ton de telha cerâmica aparente) sem escoramento do térreo. | Em casa com carga alta no pavimento superior, escorar o térreo é essencial para evitar movimentação das paredes. | Paredes fora de prumo (retrabalho de ajuste) |
 | 4 | Projeto / Perfis | Perfis vieram com furação pré-dimensionada (compatibilizada com elétrica/hidráulica), gerando muitos cortes e ajustes em obra. | Furação limitada aos pontos previstos no projeto. | Pedir os perfis com furação no máximo de pontos possíveis, para evitar cortes e ajustes manuais em obra. | Tempo perdido com cortes/ajustes |
 | 5 | Entrepiso / Execução | O contrapiso do pavimento superior foi concretado depois, não logo após o plywood. | Limitação de altura: escada/tamanho dos degraus e altura máxima permitida pelo condomínio. | Quando a altura permitir, concretar logo após fixar o plywood — dá melhor nivelamento e protege mais as madeiras. | Nivelamento e proteção das madeiras |
+| 6 | Compatibilização de projetos | A testeira do beiral teve que ser aumentada em obra para esconder a estrutura do madeiramento metálico. | Falta de compatibilização entre os projetos estrutural e arquitetônico em ponto aparente. | Compatibilizar estrutural e arquitetônico antes da obra, sobretudo em pontos visíveis (beiral/testeira), para evitar ajustes em campo. | Ajuste/retrabalho na testeira |
 |   |           |          |            |                            |         |
