@@ -75,8 +75,23 @@ _Fotos: (referência a inserir)_
 
 _Fotos: (referência a inserir)_
 
-### 2.5 Fechamentos e vedações
-_a preencher_
+### 2.5 Fechamentos e vedações (e fachada)
+> Sequência: a **vedação/plaqueamento externo veio antes do beiral**, pois a estrutura do beiral dá o acabamento sobre o plaqueamento.
+
+**Composição da parede externa:**
+- Plywood 10 mm + **manta hidrófuga** + placa cimentícia 10 mm. A manta hidrófuga permite a **saída de vapor** e impede a **entrada de umidade** no sistema.
+
+**Acabamento e fachada:**
+- Tratamento das **juntas** das placas cimentícias + aplicação de **base coat** (camada de acabamento e proteção das placas).
+- Revestimento decorativo com **meios tijolos de demolição**, assentados com **argamassa ACIII branca**.
+- **Perfil de alumínio a cada 1 m** de blocos, para apoio e suportação da fachada.
+
+**Maior desafio (ver Lições #7 e #8):**
+- Compatibilização das **juntas entre placas e entre pavimentos**.
+- **Erro de compra:** placas cimentícias de 8 mm por engano (em vez de 10 mm) — tivemos que refazer.
+- Parafusamento conforme **norma**. Juntas, parafusamento e espessura são normatizados — tudo foi refeito para não gerar problema.
+
+_Fotos: (referência a inserir)_
 
 ### 2.6 Instalações (hidráulica / elétrica)
 _a preencher_
@@ -121,4 +136,6 @@ _a preencher_
 | 4 | Projeto / Perfis | Perfis vieram com furação pré-dimensionada (compatibilizada com elétrica/hidráulica), gerando muitos cortes e ajustes em obra. | Furação limitada aos pontos previstos no projeto. | Pedir os perfis com furação no máximo de pontos possíveis, para evitar cortes e ajustes manuais em obra. | Tempo perdido com cortes/ajustes |
 | 5 | Entrepiso / Execução | O contrapiso do pavimento superior foi concretado depois, não logo após o plywood. | Limitação de altura: escada/tamanho dos degraus e altura máxima permitida pelo condomínio. | Quando a altura permitir, concretar logo após fixar o plywood — dá melhor nivelamento e protege mais as madeiras. | Nivelamento e proteção das madeiras |
 | 6 | Compatibilização de projetos | A testeira do beiral teve que ser aumentada em obra para esconder a estrutura do madeiramento metálico. | Falta de compatibilização entre os projetos estrutural e arquitetônico em ponto aparente. | Compatibilizar estrutural e arquitetônico antes da obra, sobretudo em pontos visíveis (beiral/testeira), para evitar ajustes em campo. | Ajuste/retrabalho na testeira |
+| 7 | Compra / Conferência | Compramos placas cimentícias de 8 mm por engano (a especificação era 10 mm) — tivemos que refazer. | Falta de conferência da espessura no momento da compra. | Conferir a especificação (espessura) do material no pedido, conforme norma, antes de comprar. | Retrabalho no fechamento |
+| 8 | Fachada / Normas | Juntas (entre placas e entre pavimentos) e parafusamento fora do especificado tiveram que ser refeitos. | Execução sem seguir a especificação normativa desde o início. | Planejar as juntas e seguir a norma de parafusamento das placas cimentícias desde o começo. | Retrabalho na fachada |
 |   |           |          |            |                            |         |
