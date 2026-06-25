@@ -154,7 +154,10 @@ _Fotos: (referência a inserir)_
 _a preencher_
 
 ### 2.10 Área externa / fachada / paisagismo
-_a preencher_
+**Piscina (concluída):**
+- Executada e **impermeabilizada**, com **teste de estanqueidade** realizado após a impermeabilização.
+
+_Demais itens da área externa: a preencher conforme a obra avança._
 
 ### 2.11 Entrega e detalhes finais
 _a preencher_
