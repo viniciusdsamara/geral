@@ -13,7 +13,7 @@
 - **Local:** Condomínio fechado Quinta do Golfe Reserva — São José do Rio Preto/SP
 - **Tipo:** Residência unifamiliar de alto padrão
 - **Sistema construtivo:** Steel frame
-- **Área construída:** ~490 m²
+- **Área construída:** 506,25 m²
 - **Prazo:** contratual 12 meses · meta interna 10 meses · obra em andamento
 - **Equipe / frentes:** 12 frentes no total (nem todas simultâneas) · pico de **18 colaboradores de 6 frentes diferentes** trabalhando ao mesmo tempo
 
@@ -23,7 +23,7 @@
 - **Prazo:** contratual 12 meses; meta interna de 10 meses · obra em andamento
 - **Marco de produtividade:** estrutura completa — **casa levantada em 56 dias**
 - **Custo:** ~62% do valor total da obra executado (financeiro)
-- **Escopo / porte:** ~490 m² · steel frame · 12 frentes · pico de 18 colaboradores em 6 frentes simultâneas
+- **Escopo / porte:** 506,25 m² · steel frame · 12 frentes · pico de 18 colaboradores em 6 frentes simultâneas
 
 ## 2. A obra como case técnico — linha do tempo
 > Percorrendo a obra do início ao fim, etapa por etapa. Em cada uma: o que foi feito,
