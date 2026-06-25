@@ -14,13 +14,13 @@
 - **Tipo:** Residência unifamiliar de alto padrão
 - **Sistema construtivo:** Steel frame
 - **Área construída:** ~490 m²
-- **Prazo:** contratual 12 meses · meta interna 10 meses (em rota de cumprimento) · entrega adiada por **falta de financiamento do cliente** (fator externo)
+- **Prazo:** contratual 12 meses · meta interna 10 meses · obra em andamento
 - **Equipe / frentes:** 12 frentes no total (nem todas simultâneas) · pico de **18 colaboradores de 6 frentes diferentes** trabalhando ao mesmo tempo
 
 ## 1. Resultados da obra
 > Números do início ao fim — preencher conforme a obra avança.
 
-- **Prazo:** contratual 12 meses; meta interna de 10 meses, **que seria cumprida** — entrega adiada por falta de financiamento (fator externo, **não de execução**)
+- **Prazo:** contratual 12 meses; meta interna de 10 meses · obra em andamento
 - **Marco de produtividade:** estrutura completa — **casa levantada em 56 dias**
 - **Custo:** orçado x realizado — _a preencher_
 - **Qualidade:** retrabalho, conformidade, entregas — _a preencher_
