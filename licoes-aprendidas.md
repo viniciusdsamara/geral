@@ -16,6 +16,7 @@
 | # | Data | Obra | Categoria | O que aconteceu | Causa raiz | Lição / O que fazer diferente | Impacto | Status |
 |---|------|------|-----------|-----------------|------------|-------------------------------|---------|--------|
 | 1 |  | RL | Cliente / Comunicação | Cliente extremamente exigente — questionava tudo, nada estava bom, sempre exigia uma resposta à altura. Não aceitava meias palavras nem enrolação. | Perfil do cliente: muito exigente e questionador; cobrava domínio e propriedade nas respostas. | (a) Cuidado redobrado com o que se fala — nada de achismo ou enrolação. (b) Dominar tudo o que acontece na obra: questionar e entender cada detalhe, pra sempre responder com segurança e propriedade. | Credibilidade / relação com o cliente | Aprendido |
+| 2 |  | RL | Execução técnica (alvenaria) | A grande vantagem da alvenaria é a flexibilidade para mudanças e ajustes durante a obra — algo que eu não tinha no steel frame (minha origem). Ganhei bem mais domínio técnico nesse aspecto. | Vinha do steel frame (sistema mais rígido); a RL foi minha imersão em alvenaria, com uma equipe de civil muito boa e experiente. | (a) Dominar a flexibilidade da alvenaria (mudanças e ajustes em obra) como ferramenta. (b) Cercar-se de equipe que entende muito acelera a absorção de conhecimento — usar gente experiente como fonte de aprendizado. | Ganho de domínio técnico / versatilidade entre sistemas construtivos | Aprendido |
 |   |      |      |           |                 |            |                               |         |        |
 
 ---
