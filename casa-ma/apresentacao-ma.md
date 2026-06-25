@@ -136,6 +136,18 @@ _Fotos: (referência a inserir)_
 - Placas de **gesso Performa** + enchimento de **lã de PET** (isolamento acústico/térmico).
 - **Requadros das janelas:** os vãos foram deixados ~10 cm **maiores** que o projeto — **por decisão nossa, para não errar a locação dos vãos**. Plaqueamos as janelas até o tamanho exato para embutir as esquadrias. _Técnica preventiva: deixar o vão maior e ajustar com plaqueamento garante a locação correta das esquadrias._
 
+**Forros (em andamento):**
+- Forro do **pavimento superior** concluído.
+- Parte do forro do **pavimento térreo**, com **lã de rocha** para isolamento acústico (reduzir o ruído do andar de cima ouvido embaixo).
+
+**Acabamento de paredes (em andamento):**
+- Paredes do **pavimento superior amaciadas** (preparo para pintura).
+
+**Madeiramento interno (concluído):**
+- Pergolados de madeira no **corredor, garagem, sala de estar e espaço gourmet**.
+
+> 🔇 **Destaque de qualidade — cuidado acústico em camadas:** bandas acústicas no entrepiso (2.3) + lã de PET nas paredes + lã de rocha no forro.
+
 _Fotos: (referência a inserir)_
 
 ### 2.9 Esquadrias e vidros
