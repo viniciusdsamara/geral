@@ -94,7 +94,19 @@ _Fotos: (referência a inserir)_
 _Fotos: (referência a inserir)_
 
 ### 2.6 Instalações (hidráulica / elétrica)
-_a preencher_
+
+**Hidráulica:**
+- Toda em **PEX**.
+- Os projetos previam muita tubulação **pelo chão** — inviável no steel frame. Reprojetamos a execução passando a infra pelo **entreforro e paredes**, estilo predial, com **compressor** (pressurização) e aquecimento a gás com **boiler**.
+- **Desafio do PEX:** fixar muito bem para evitar movimentação e ruído dentro das paredes — usamos **espuma expansiva e fita Valsiva**.
+- Cuidado de projeto: **minimizar cotovelos** na rede para reduzir perda de carga/pressão.
+
+**Elétrica:**
+- Execução tranquila, com toda a **infraestrutura no entreforro**.
+- Mesmo caso da hidráulica: o projeto previa muita infra pelo chão → passamos pelo **entreforro e paredes**.
+- **Maior dificuldade:** alterações do **projeto luminotécnico**, que chegou **depois** dos pontos já executados (conforme o arquitetônico) → retrabalho (ver Lição #10).
+
+_Fotos: (referência a inserir)_
 
 ### 2.7 Áreas molhadas / impermeabilização
 **Case — Impermeabilização e estanqueidade dos banheiros**
@@ -138,4 +150,6 @@ _a preencher_
 | 6 | Compatibilização de projetos | A testeira do beiral teve que ser aumentada em obra para esconder a estrutura do madeiramento metálico. | Falta de compatibilização entre os projetos estrutural e arquitetônico em ponto aparente. | Compatibilizar estrutural e arquitetônico antes da obra, sobretudo em pontos visíveis (beiral/testeira), para evitar ajustes em campo. | Ajuste/retrabalho na testeira |
 | 7 | Compra / Conferência | Compramos placas cimentícias de 8 mm por engano (a especificação era 10 mm) — tivemos que refazer. | Falta de conferência da espessura no momento da compra. | Conferir a especificação (espessura) do material no pedido, conforme norma, antes de comprar. | Retrabalho no fechamento |
 | 8 | Fachada / Normas | Juntas (entre placas e entre pavimentos) e parafusamento fora do especificado tiveram que ser refeitos. | Execução sem seguir a especificação normativa desde o início. | Planejar as juntas e seguir a norma de parafusamento das placas cimentícias desde o começo. | Retrabalho na fachada |
+| 9 | Instalações / Projeto (steel frame) | Os projetos de hidráulica e elétrica previam muita infra passando pelo chão — inviável no steel frame. | Projetos concebidos como em alvenaria, sem adaptação ao steel frame. | Instalações no steel frame devem ser projetadas pelo **entreforro e paredes** desde o projeto, não reaproveitar a solução de alvenaria. | Muito reprojeto/adaptação em obra |
+| 10 | Projeto luminotécnico / Sequência | O projeto luminotécnico chegou depois dos pontos elétricos já executados (conforme o arquitetônico), gerando retrabalho. | Luminotécnico definido tarde, fora de sequência com a execução. | Fechar o projeto luminotécnico antes de executar os pontos elétricos. | Retrabalho nos pontos elétricos |
 |   |           |          |            |                            |         |
