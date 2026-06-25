@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casa M&A — Apresentação da Obra</title>
+<style>
+  :root{
+    --slate:#1e293b; --slate2:#334155; --bronze:#a86b3c; --bronze-d:#8a5630;
+    --bg:#f6f5f2; --card:#ffffff; --line:#e5e1da; --ink:#1f2937; --muted:#6b7280;
+    --good:#2f7d5b; --warn:#b4632a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:980px;margin:0 auto;padding:0 24px}
+  h2{font-size:1.5rem;color:var(--slate);margin-bottom:4px;letter-spacing:-.01em}
+  h3{font-size:1.05rem;color:var(--slate);margin-bottom:8px}
+  .sec{padding:56px 0;border-bottom:1px solid var(--line)}
+  .sec .eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;font-weight:700;color:var(--bronze);margin-bottom:10px}
+  .lead{color:var(--muted);max-width:60ch;margin-bottom:26px}
+
+  /* HERO */
+  .hero{background:linear-gradient(135deg,#1e293b 0%,#2c3e50 100%);color:#fff;padding:90px 0 70px}
+  .hero .wrap{max-width:980px}
+  .hero .kicker{text-transform:uppercase;letter-spacing:.2em;font-size:.78rem;color:#d8b48f;font-weight:700;margin-bottom:18px}
+  .hero h1{font-size:2.9rem;line-height:1.07;letter-spacing:-.02em;margin-bottom:14px;font-weight:800}
+  .hero p{color:#cbd5e1;font-size:1.12rem;max-width:56ch}
+  .tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .tag{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);
+    color:#e8eef5;padding:7px 14px;border-radius:999px;font-size:.82rem;font-weight:500}
+  .byline{margin-top:34px;padding-top:20px;border-top:1px solid rgba(255,255,255,.15);color:#94a3b8;font-size:.9rem}
+  .byline b{color:#fff}
+
+  /* FICHA */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+  .info li{list-style:none;padding:9px 0;border-bottom:1px dashed var(--line);font-size:.95rem}
+  .info li b{color:var(--slate)}
+  .info .k{display:block;text-transform:uppercase;letter-spacing:.08em;font-size:.68rem;color:var(--bronze);font-weight:700;margin-bottom:2px}
+  .timeline-mini{position:relative;padding-left:22px}
+  .timeline-mini li{list-style:none;position:relative;padding:8px 0;font-size:.93rem}
+  .timeline-mini li::before{content:"";position:absolute;left:-22px;top:14px;width:9px;height:9px;border-radius:50%;background:var(--bronze)}
+  .timeline-mini::before{content:"";position:absolute;left:-18px;top:6px;bottom:6px;width:2px;background:var(--line)}
+
+  /* STATS */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 18px;text-align:center}
+  .stat .n{font-size:2rem;font-weight:800;color:var(--bronze);letter-spacing:-.02em}
+  .stat .l{font-size:.82rem;color:var(--muted);margin-top:4px}
+  .note{background:#fff;border-left:4px solid var(--good);border-radius:8px;padding:14px 18px;margin-top:22px;font-size:.92rem}
+  .note b{color:var(--good)}
+
+  /* TIMELINE */
+  .tl{position:relative;padding-left:30px}
+  .tl::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:var(--line)}
+  .phase{position:relative;margin-bottom:22px;background:var(--card);border:1px solid var(--line);
+    border-radius:14px;padding:18px 20px;page-break-inside:avoid}
+  .phase::before{content:"";position:absolute;left:-26px;top:24px;width:14px;height:14px;border-radius:50%;
+    background:#fff;border:3px solid var(--bronze)}
+  .phase.now::before{background:var(--bronze);box-shadow:0 0 0 4px rgba(168,107,60,.2)}
+  .phase h3{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  .phase .ph-n{font-size:.72rem;font-weight:700;color:#fff;background:var(--slate2);border-radius:6px;padding:2px 8px}
+  .phase ul{margin:8px 0 0 18px}
+  .phase li{font-size:.9rem;margin:4px 0}
+  .badge{display:inline-block;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;
+    padding:3px 9px;border-radius:999px;margin-left:6px}
+  .badge.now{background:#fde9d6;color:var(--warn)}
+  .badge.done{background:#e1f0e9;color:var(--good)}
+  .photo{margin-top:12px;height:60px;border:2px dashed var(--line);border-radius:8px;display:flex;
+    align-items:center;justify-content:center;color:#b8b2a8;font-size:.78rem}
+
+  /* CASE */
+  .case{background:linear-gradient(135deg,#fff 0%,#fbf7f2 100%);border:1px solid var(--bronze);
+    border-radius:16px;padding:28px;page-break-inside:avoid}
+  .case .lbl{font-weight:700;color:var(--bronze);font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;margin-top:14px}
+  .case .lbl:first-child{margin-top:0}
+  .case ul{margin:6px 0 0 18px}
+  .case .result{margin-top:18px;background:#e1f0e9;border-radius:10px;padding:14px 18px;font-weight:600;color:var(--good)}
+
+  /* TABLE */
+  table{width:100%;border-collapse:collapse;font-size:.86rem;background:#fff;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+  th{background:var(--slate);color:#fff;text-align:left;padding:11px 12px;font-size:.74rem;text-transform:uppercase;letter-spacing:.05em}
+  td{padding:11px 12px;border-top:1px solid var(--line);vertical-align:top}
+  tr:nth-child(even) td{background:#faf9f7}
+  td .cat{font-weight:700;color:var(--slate)}
+  td .imp{color:var(--warn);font-size:.82rem}
+
+  /* SYNTH */
+  .synth{background:var(--slate);color:#fff;border-radius:16px;padding:34px}
+  .synth h2{color:#fff}
+  .synth .big{font-size:1.35rem;font-weight:700;color:#fff;margin:8px 0 18px;line-height:1.4}
+  .synth .big span{color:#e0a972}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:8px}
+  .cols h4{color:#e0a972;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+  .cols ul{margin-left:18px}
+  .cols li{font-size:.9rem;margin:5px 0;color:#cbd5e1}
+
+  footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.82rem}
+  @media(max-width:720px){.grid2,.stats,.cols{grid-template-columns:1fr}.hero h1{font-size:2.1rem}}
+  @media print{body{background:#fff}.sec{padding:28px 0}.phase,.case,.stat{box-shadow:none}}
+</style>
+</head>
+<body>
+
+<!-- CAPA -->
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Apresentação de obra · Zait</div>
+    <h1>Casa M&A</h1>
+    <p>Residência unifamiliar de alto padrão em steel frame — da fundação ao acabamento, conduzida com método, controle técnico e foco em resultado.</p>
+    <div class="tags">
+      <span class="tag">Steel frame</span>
+      <span class="tag">~490 m²</span>
+      <span class="tag">Quinta do Golfe Reserva · Rio Preto/SP</span>
+      <span class="tag">12 frentes</span>
+    </div>
+    <div class="byline">Responsável direto da obra: <b>Vinícius</b> — Auxiliar de Engenharia · Representante Zait na região</div>
+  </div>
+</header>
+
+<!-- FICHA + TRAJETÓRIA -->
+<section class="sec"><div class="wrap">
+  <div class="eyebrow">Visão geral</div>
+  <div class="grid2">
+    <div>
+      <h3>Ficha técnica</h3>
+      <ul class="info">
+        <li><span class="k">Local</span><b>Cond. Quinta do Golfe Reserva</b> — São José do Rio Preto/SP</li>
+        <li><span class="k">Tipo</span>Residência unifamiliar de alto padrão</li>
+        <li><span class="k">Sistema</span>Steel frame</li>
+        <li><span class="k">Área</span>~490 m²</li>
+        <li><span class="k">Prazo</span>Contratual 12 meses · meta interna 10 meses (em rota de cumprimento)</li>
+        <li><span class="k">Equipe</span>12 frentes · pico de 18 colaboradores em 6 frentes simultâneas</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Minha trajetória na obra</h3>
+      <ul class="timeline-mini">
+        <li>Início como <b>assistente do Victor</b> (2 meses, estagiário)</li>
+        <li><b>Novembro:</b> efetivado como Auxiliar de Engenharia</li>
+        <li><b>Fev/Mar:</b> assumi como <b>responsável direto</b> pela obra</li>
+        <li><b>Julho:</b> passo a <b>representar a Zait na região</b></li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- RESULTADOS -->
+<section class="sec"><div class="wrap">
+  <div class="eyebrow">Resultados</div>
+  <h2>Números da obra</h2>
+  <p class="lead">Indicadores do início ao ponto atual.</p>
+  <div class="stats">
+    <div class="stat"><div class="n">56</div><div class="l">dias para levantar a casa</div></div>
+    <div class="stat"><div class="n">~490</div><div class="l">m² construídos</div></div>
+    <div class="stat"><div class="n">12</div><div class="l">frentes de serviço</div></div>
+    <div class="stat"><div class="n">18</div><div class="l">colaboradores no pico</div></div>
+  </div>
+  <div class="note"><b>Prazo:</b> a meta interna de 10 meses <b>seria cumprida</b> — a entrega foi adiada por falta de financiamento do cliente (fator externo, <b>não de execução</b>).</div>
+  <p style="margin-top:16px;color:var(--muted);font-size:.88rem">Custo (orçado × realizado) e indicadores de qualidade: a preencher no fechamento.</p>
+</div></section>
+
+<!-- LINHA DO TEMPO -->
+<section class="sec"><div class="wrap">
+  <div class="eyebrow">Case técnico</div>
+  <h2>Linha do tempo da obra</h2>
+  <p class="lead">Cada etapa com o que foi executado e as soluções de engenharia adotadas.</p>
+  <div class="tl">
+
+    <div class="phase"><h3><span class="ph-n">2.1</span> Terreno e fundação</h3>
+      <ul>
+        <li>Fundação dimensionada pelo estudo do terreno e distribuição de cargas.</li>
+        <li>Início por opção do cliente, antes do projeto de fundações concluído.</li>
+      </ul><div class="photo">📷 foto da fase</div></div>
+
+    <div class="phase"><h3><span class="ph-n">2.2</span> Estrutura steel frame</h3>
+      <ul>
+        <li><b>Casa levantada em 56 dias.</b></li>
+        <li>Painéis fixados nas baldrames, no nível do piso acabado.</li>
+        <li><b>Proteção anticorrosão:</b> manta asfáltica aluminizada no contato com cimento.</li>
+        <li><b>Controle de qualidade:</b> conferência de parafusamento com 2 sprays (verde = ok / vermelho = falta).</li>
+      </ul><div class="photo">📷 foto da fase</div></div>
+
+    <div class="phase"><h3><span class="ph-n">2.3</span> Entrepiso / laje</h3>
+      <ul>
+        <li>Banda acústica → plywood → manta líquida → painéis → contrapiso em concreto leve (EPS).</li>
+      </ul><div class="photo">📷 foto da fase</div></div>
+
+    <div class="phase"><h3><span class="ph-n">2.4</span> Cobertura</h3>
+      <ul>
+        <li>Madeiramento metálico (coerência com o steel frame).</li>
+        <li>Telhas Maristela coloniais (~4 kg), amarradas uma a uma.</li>
+        <li>Beiral em garapa; testeira ampliada para esconder a estrutura metálica.</li>
+      </ul><div class="photo">📷 foto da fase</div></div>
+
+    <div class="phase"><h3><span class="ph-n">2.5</span> Fechamentos e fachada</h3>
+      <ul>
+        <li>Parede: plywood 10 mm + manta hidrófuga + cimentícia 10 mm.</li>
+        <li>Fachada decorativa em meio tijolo de demolição (argamassa ACIII), perfil de alumínio a cada 1 m.</li>
+      </ul><div class="photo">📷 foto da fase</div></div>
+
+    <div class="phase"><h3><span class="ph-n">2.6</span> Instalações</h3>
+      <ul>
+        <li>Hidráulica em PEX; infra reprojetada do chão para o entreforro/paredes (estilo predial, pressurização + boiler).</li>
+        <li>Elétrica no entreforro; VRV (dutada na sala/suíte, cassetes nos demais).</li>
+        <li><b>Ponto crítico:</b> travessia das baldrames (interno↔externo) — prevista, mas difícil de executar.</li>
+      </ul><div class="photo">📷 foto da fase</div></div>
+
+    <div class="phase"><h3><span class="ph-n">2.7</span> Áreas molhadas / impermeabilização <span class="badge done">case</span></h3>
+      <ul>
+        <li>Impermeabilização e estanqueidade dos banheiros resolvidas (detalhe completo abaixo).</li>
+      </ul><div class="photo">📷 foto da fase</div></div>
+
+    <div class="phase now"><h3><span class="ph-n">2.8</span> Acabamentos internos <span class="badge now">ponto atual</span></h3>
+      <ul>
+        <li>Fechamento interno (gesso Performa + lã de PET); técnica dos requadros para cravar a locação das esquadrias.</li>
+        <li>Forros (superior concluído; térreo com lã de rocha), paredes do superior amaciadas, pergolados internos.</li>
+        <li><b>Destaque:</b> cuidado acústico em 3 camadas (entrepiso, paredes, forro).</li>
+      </ul><div class="photo">📷 foto da fase</div></div>
+
+    <div class="phase"><h3><span class="ph-n">2.10</span> Área externa</h3>
+      <ul>
+        <li>Piscina executada, impermeabilizada e com teste de estanqueidade.</li>
+      </ul><div class="photo">📷 foto da fase</div></div>
+
+  </div>
+</div></section>
+
+<!-- CASE DESTAQUE -->
+<section class="sec"><div class="wrap">
+  <div class="eyebrow">Case em destaque</div>
+  <h2>Impermeabilização e estanqueidade dos banheiros</h2>
+  <p class="lead">O desafio técnico mais complexo da obra — e como foi resolvido.</p>
+  <div class="case">
+    <div class="lbl">Desafio</div>
+    <p>Impermeabilizar e passar no teste de estanqueidade com contrapiso muito fino — em pontos só ~2 cm sobre o Plywood — e ralos lineares colados na parede.</p>
+    <div class="lbl">Solução técnica</div>
+    <ul>
+      <li>Caixas de concreto sob o Plywood para travar a movimentação de ralos e encanamento.</li>
+      <li>Aditivo impermeabilizante no concreto e refazimento de pontos estratégicos.</li>
+      <li>Argamassa polimérica flexível com fibras (acompanha a movimentação sem trincar).</li>
+    </ul>
+    <div class="result">✓ Resultado: impermeabilização sanada e estanqueidade resolvida.</div>
+  </div>
+</div></section>
+
+<!-- LIÇÕES -->
+<section class="sec"><div class="wrap">
+  <div class="eyebrow">Lições e melhorias</div>
+  <h2>O que aprendi — e o que proponho mudar</h2>
+  <p class="lead">12 lições registradas ao longo da obra, com a melhoria proposta para a próxima.</p>
+  <table>
+    <thead><tr><th>#</th><th>Tema</th><th>Lição / melhoria proposta</th><th>Impacto</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td class="cat">Impermeabilização</td><td>Adotar <b>rebaixo de ~10 cm</b> nas áreas molhadas em steel frame; especificar aditivo + argamassa polimérica flexível.</td><td class="imp">Retrabalho evitável</td></tr>
+      <tr><td>2</td><td class="cat">Fundação / Custo</td><td>Aterro com compactação controlada baratearia a fundação.</td><td class="imp">−20 a 30%</td></tr>
+      <tr><td>3</td><td class="cat">Escoramento</td><td>Com carga alta no pavimento superior, escorar o térreo é essencial.</td><td class="imp">Paredes fora de prumo</td></tr>
+      <tr><td>4</td><td class="cat">Perfis</td><td>Pedir perfis com furação no máximo de pontos possíveis.</td><td class="imp">Cortes/ajustes</td></tr>
+      <tr><td>5</td><td class="cat">Entrepiso</td><td>Quando a altura permitir, concretar logo após o plywood.</td><td class="imp">Nivelamento/proteção</td></tr>
+      <tr><td>6</td><td class="cat">Compatibilização</td><td>Compatibilizar estrutural × arquitetônico antes, sobretudo em pontos visíveis.</td><td class="imp">Retrabalho testeira</td></tr>
+      <tr><td>7</td><td class="cat">Compra / Conferência</td><td>Conferir a especificação (espessura) do material antes de comprar.</td><td class="imp">Retrabalho fechamento</td></tr>
+      <tr><td>8</td><td class="cat">Fachada / Normas</td><td>Planejar juntas e parafusamento conforme norma desde o início.</td><td class="imp">Retrabalho fachada</td></tr>
+      <tr><td>9</td><td class="cat">Instalações</td><td>No steel frame, projetar a infra pelo entreforro/paredes (não pelo chão).</td><td class="imp">Reprojeto em obra</td></tr>
+      <tr><td>10</td><td class="cat">Luminotécnico</td><td>Fechar o luminotécnico antes de executar os pontos elétricos.</td><td class="imp">Retrabalho pontos</td></tr>
+      <tr><td>11</td><td class="cat">Ar condicionado</td><td>Definir os pontos de AC antes do plaqueamento das paredes.</td><td class="imp">Alterações pós-fecho</td></tr>
+      <tr><td>12</td><td class="cat">Travessias</td><td>Embutir mangas nas baldrames na concretagem e detalhar a travessia.</td><td class="imp">Ajustes concreto/aço</td></tr>
+    </tbody>
+  </table>
+</div></section>
+
+<!-- SÍNTESE -->
+<section class="sec"><div class="wrap">
+  <div class="synth">
+    <h2>Síntese</h2>
+    <div class="big">O maior gargalo da obra não foi a execução — foi o <span>projeto</span> (compatibilização e sequência). E foi no campo que esses problemas foram resolvidos.</div>
+    <div class="cols">
+      <div>
+        <h4>Onde estava a dificuldade</h4>
+        <ul>
+          <li>Projetos não concebidos para steel frame (infra pelo chão).</li>
+          <li>Falta de compatibilização estrutural × arquitetônico.</li>
+          <li>Definições fora de sequência (luminotécnico, AC).</li>
+        </ul>
+      </div>
+      <div>
+        <h4>O que entreguei</h4>
+        <ul>
+          <li>Produtividade: casa levantada em 56 dias.</li>
+          <li>Rigor técnico: anticorrosão, acústica em camadas, controle de parafusamento.</li>
+          <li>Resolução de problemas difíceis (impermeabilização) e 12 lições para a próxima obra.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<footer>Casa M&A · Apresentação de obra — versão de trabalho · fotos de cada fase a inserir no fechamento</footer>
+
+</body>
+</html>
