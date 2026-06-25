@@ -55,7 +55,16 @@ _Fotos: (referência a inserir)_
 _Fotos: (referência a inserir)_
 
 ### 2.3 Entrepiso / laje (Plywood)
-_a preencher_
+Sequência executada:
+1. **Bandas acústicas** sobre a estrutura, para reduzir o ruído de movimentação sobre a laje.
+2. **Plywood** parafusado.
+3. Impermeabilização com **manta líquida**.
+4. Painéis do pavimento superior parafusados.
+5. **Contrapiso em concreto leve** (EPS/isopor como agregado).
+
+**O que eu faria diferente (ver Lição #5):** concretar logo após a fixação do plywood, para melhor nivelamento e maior proteção das madeiras. Não foi possível por limitação de altura — escada/tamanho dos degraus e altura máxima permitida pelo condomínio.
+
+_Fotos: (referência a inserir)_
 
 ### 2.4 Cobertura
 _a preencher_
@@ -104,4 +113,5 @@ _a preencher_
 | 2 | Fundação / Custo | Fundação dimensionada pelo estudo do terreno e pela distribuição de cargas. | Início da obra antes do projeto de fundações, por opção do cliente. | Se tivéssemos feito um aterro com compactação controlada, conseguiríamos baratear de 20 a 30% os custos da fundação. | −20 a 30% no custo da fundação |
 | 3 | Estrutura / Escoramento | Algumas paredes saíram do prumo ao iniciar a cobertura. | Carga alta no pavimento superior (~12 ton de telha cerâmica aparente) sem escoramento do térreo. | Em casa com carga alta no pavimento superior, escorar o térreo é essencial para evitar movimentação das paredes. | Paredes fora de prumo (retrabalho de ajuste) |
 | 4 | Projeto / Perfis | Perfis vieram com furação pré-dimensionada (compatibilizada com elétrica/hidráulica), gerando muitos cortes e ajustes em obra. | Furação limitada aos pontos previstos no projeto. | Pedir os perfis com furação no máximo de pontos possíveis, para evitar cortes e ajustes manuais em obra. | Tempo perdido com cortes/ajustes |
+| 5 | Entrepiso / Execução | O contrapiso do pavimento superior foi concretado depois, não logo após o plywood. | Limitação de altura: escada/tamanho dos degraus e altura máxima permitida pelo condomínio. | Quando a altura permitir, concretar logo após fixar o plywood — dá melhor nivelamento e protege mais as madeiras. | Nivelamento e proteção das madeiras |
 |   |           |          |            |                            |         |
