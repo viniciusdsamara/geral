@@ -27,6 +27,7 @@
 > Números do início ao fim — preencher conforme a obra avança.
 
 - **Prazo:** contratual 12 meses; meta interna de 10 meses, **que seria cumprida** — entrega adiada por falta de financiamento (fator externo, **não de execução**)
+- **Marco de produtividade:** estrutura completa — **casa levantada em 56 dias**
 - **Custo:** orçado x realizado — _a preencher_
 - **Qualidade:** retrabalho, conformidade, entregas — _a preencher_
 - **Escopo / porte:** ~490 m² · steel frame · 12 frentes · pico de 18 colaboradores em 6 frentes simultâneas
@@ -44,7 +45,13 @@
 _Fotos: (referência a inserir)_
 
 ### 2.2 Estrutura steel frame (montagem dos painéis)
-_a preencher_
+- **Montagem muito rápida — a casa toda foi levantada em 56 dias.**
+- Painéis fixados nas **baldrames no nível do piso acabado** (um pouco acima do contrapiso) para não sofrerem esforços laterais.
+- **Controle de parafusamento com 2 sprays** (destaque técnico): verde = parafuso conferido/ok; vermelho = falta de parafuso. Método visual simples e eficaz para garantir a conferência.
+- Esquadro e prumo ajustados conforme subia de pavimento.
+- **Atenção (ver Lição #3):** com a carga alta do pavimento superior (telhas de cerâmica aparente, ~12 ton), algumas paredes saíram do prumo ao iniciar a cobertura.
+
+_Fotos: (referência a inserir)_
 
 ### 2.3 Entrepiso / laje (Plywood)
 _a preencher_
@@ -94,4 +101,6 @@ _a preencher_
 |---|-----------|----------|------------|----------------------------|---------|
 | 1 | Impermeabilização (steel frame) | Contrapiso fino (em pontos só ~2 cm sobre o Plywood) e ralos lineares colados na parede dificultaram a impermeabilização e o teste de estanqueidade dos banheiros. | Detalhamento das áreas molhadas no steel frame não previu espessura de contrapiso e afastamento de ralo suficientes para a vedação. | Em área molhada de steel frame, **prever desde o projeto/detalhamento**: espessura de contrapiso adequada, afastamento do ralo em relação à parede e travamento de ralo/encanamento contra movimentação. **Melhoria principal: adotar um rebaixo de pelo menos ~10 cm nas áreas molhadas nos próximos projetos de steel frame**, facilitando a execução e evitando problemas de impermeabilização. Especificar aditivo impermeabilizante + argamassa polimérica flexível com fibras. | Retrabalho (refazer pontos) + compra de aditivo — porém resolvido |
 | 2 | Fundação / Custo | Fundação dimensionada pelo estudo do terreno e pela distribuição de cargas. | Início da obra antes do projeto de fundações, por opção do cliente. | Se tivéssemos feito um aterro com compactação controlada, conseguiríamos baratear de 20 a 30% os custos da fundação. | −20 a 30% no custo da fundação |
+| 3 | Estrutura / Escoramento | Algumas paredes saíram do prumo ao iniciar a cobertura. | Carga alta no pavimento superior (~12 ton de telha cerâmica aparente) sem escoramento do térreo. | Em casa com carga alta no pavimento superior, escorar o térreo é essencial para evitar movimentação das paredes. | Paredes fora de prumo (retrabalho de ajuste) |
+| 4 | Projeto / Perfis | Perfis vieram com furação pré-dimensionada (compatibilizada com elétrica/hidráulica), gerando muitos cortes e ajustes em obra. | Furação limitada aos pontos previstos no projeto. | Pedir os perfis com furação no máximo de pontos possíveis, para evitar cortes e ajustes manuais em obra. | Tempo perdido com cortes/ajustes |
 |   |           |          |            |                            |         |
