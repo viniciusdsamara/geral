@@ -11,7 +11,7 @@
 
 ## Ficha técnica da obra
 - **Local:** Condomínio fechado Quinta do Golfe Reserva — São José do Rio Preto/SP
-- **Tipo:** Residência unifamiliar de alto padrão
+- **Tipo:** Residência de alto padrão
 - **Sistema construtivo:** Steel frame
 - **Área construída:** 506,25 m²
 - **Prazo:** contratual 12 meses · meta interna 10 meses · obra em andamento
@@ -21,7 +21,7 @@
 > Números do início ao fim — preencher conforme a obra avança.
 
 - **Prazo:** contratual 12 meses; meta interna de 10 meses · obra em andamento
-- **Marco de produtividade:** estrutura completa — **casa levantada em 56 dias**
+- **Marco de produtividade:** **estrutura de painéis levantada em 56 dias**
 - **Custo:** ~62% do valor total da obra executado (financeiro)
 - **Escopo / porte:** 506,25 m² · steel frame · 12 frentes · pico de 18 colaboradores em 6 frentes simultâneas
 
@@ -38,7 +38,7 @@
 _Fotos: (referência a inserir)_
 
 ### 2.2 Estrutura steel frame (montagem dos painéis)
-- **Montagem muito rápida — a casa toda foi levantada em 56 dias.**
+- **Montagem muito rápida — estrutura de painéis levantada em 56 dias.**
 - Painéis fixados nas **baldrames no nível do piso acabado** (um pouco acima do contrapiso) para não sofrerem esforços laterais.
 - **Proteção contra corrosão:** todo painel fixado em concreto ou em contato com cimento foi isolado com **manta asfáltica aluminizada**, evitando corrosão química do aço.
 - **Controle de parafusamento com 2 sprays** (destaque técnico): verde = parafuso conferido/ok; vermelho = falta de parafuso. Método visual simples e eficaz para garantir a conferência.
@@ -168,7 +168,7 @@ _a preencher_
 | 4 | Projeto / Perfis | Perfis vieram com furação pré-dimensionada (compatibilizada com elétrica/hidráulica), gerando muitos cortes e ajustes em obra. | Furação limitada aos pontos previstos no projeto. | Pedir os perfis com furação no máximo de pontos possíveis, para evitar cortes e ajustes manuais em obra. | Tempo perdido com cortes/ajustes |
 | 5 | Entrepiso / Execução | O contrapiso do pavimento superior foi concretado depois, não logo após o plywood. | Limitação de altura: escada/tamanho dos degraus e altura máxima permitida pelo condomínio. | Quando a altura permitir, concretar logo após fixar o plywood — dá melhor nivelamento e protege mais as madeiras. | Nivelamento e proteção das madeiras |
 | 6 | Compatibilização de projetos | A testeira do beiral teve que ser aumentada em obra para esconder a estrutura do madeiramento metálico. | Falta de compatibilização entre os projetos estrutural e arquitetônico em ponto aparente. | Compatibilizar estrutural e arquitetônico antes da obra, sobretudo em pontos visíveis (beiral/testeira), para evitar ajustes em campo. | Ajuste/retrabalho na testeira |
-| 7 | Compra / Conferência | Compramos placas cimentícias de 8 mm por engano (a especificação era 10 mm) — tivemos que refazer. | Falta de conferência da espessura no momento da compra. | Conferir a especificação (espessura) do material no pedido, conforme norma, antes de comprar. | Retrabalho no fechamento |
+| 7 | Compra | Placa cimentícia comprada com a espessura errada (especificação entendida como 8 mm, era 10 mm) — tivemos que refazer. | Erro na compra: especificação entendida errada. | Alinhar/confirmar a especificação exata (espessura) no pedido de compra. | Retrabalho no fechamento |
 | 8 | Fachada / Normas | Juntas (entre placas e entre pavimentos) e parafusamento fora do especificado tiveram que ser refeitos. | Execução sem seguir a especificação normativa desde o início. | Planejar as juntas e seguir a norma de parafusamento das placas cimentícias desde o começo. | Retrabalho na fachada |
 | 9 | Instalações / Projeto (steel frame) | Os projetos de hidráulica e elétrica previam muita infra passando pelo chão — inviável no steel frame. | Projetos concebidos como em alvenaria, sem adaptação ao steel frame. | Instalações no steel frame devem ser projetadas pelo **entreforro e paredes** desde o projeto, não reaproveitar a solução de alvenaria. | Muito reprojeto/adaptação em obra |
 | 10 | Projeto luminotécnico / Sequência | O projeto luminotécnico chegou depois dos pontos elétricos já executados (conforme o arquitetônico), gerando retrabalho. | Luminotécnico definido tarde, fora de sequência com a execução. | Fechar o projeto luminotécnico antes de executar os pontos elétricos. | Retrabalho nos pontos elétricos |
