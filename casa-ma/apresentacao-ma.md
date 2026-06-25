@@ -38,7 +38,8 @@
 ### 2.1 Terreno e fundação
 - **Terreno:** sem grandes dificuldades.
 - **Fundação:** dimensionada com base no estudo do terreno (sondagem) e na distribuição de cargas da casa.
-- **Melhoria identificada:** um aterro com **compactação controlada** provavelmente teria reduzido o custo da fundação em **20–30%** (ver Lição #2).
+- **Contexto:** a compactação foi executada **antes de o projeto de fundações ficar pronto**, porque o cliente queria iniciar a obra o quanto antes para acelerar a entrega — o que limitou a otimização aterro × fundação.
+- **Melhoria identificada:** com o projeto pronto e um aterro com **compactação controlada**, dava pra reduzir o custo da fundação em **20–30%** (ver Lição #2).
 
 _Fotos: (referência a inserir)_
 
@@ -92,5 +93,5 @@ _a preencher_
 | # | Categoria | Situação | Causa raiz | Lição / melhoria proposta | Impacto |
 |---|-----------|----------|------------|----------------------------|---------|
 | 1 | Impermeabilização (steel frame) | Contrapiso fino (em pontos só ~2 cm sobre o Plywood) e ralos lineares colados na parede dificultaram a impermeabilização e o teste de estanqueidade dos banheiros. | Detalhamento das áreas molhadas no steel frame não previu espessura de contrapiso e afastamento de ralo suficientes para a vedação. | Em área molhada de steel frame, **prever desde o projeto/detalhamento**: espessura de contrapiso adequada, afastamento do ralo em relação à parede e travamento de ralo/encanamento contra movimentação. **Melhoria principal: adotar um rebaixo de pelo menos ~10 cm nas áreas molhadas nos próximos projetos de steel frame**, facilitando a execução e evitando problemas de impermeabilização. Especificar aditivo impermeabilizante + argamassa polimérica flexível com fibras. | Retrabalho (refazer pontos) + compra de aditivo — porém resolvido |
-| 2 | Fundação / Custo | A fundação foi dimensionada pelo estudo do terreno e pela distribuição de cargas, sem grandes problemas. | Não foi avaliada a alternativa de preparar o terreno antes (aterro compactado) para reduzir a solicitação e o custo da fundação. | Nos próximos projetos, avaliar executar **aterro com compactação controlada** para melhorar a capacidade de suporte do solo e baratear a fundação. | Economia estimada de **20–30%** no custo da fundação |
+| 2 | Fundação / Custo / Projeto | A fundação foi dimensionada pelo estudo do terreno e pela distribuição de cargas, sem grandes problemas. | A compactação/início ocorreu **sem o projeto de fundações pronto** (pressão do cliente para começar logo e entregar rápido), o que impediu coordenar aterro + fundação para otimizar o custo. | (a) Ter o **projeto de fundações concluído antes de iniciar a movimentação de terra**, para dimensionar aterro e fundação em conjunto. (b) Executar **aterro com compactação controlada** para melhorar a capacidade de suporte e baratear a fundação. (c) Quando o cliente pressiona por início rápido, alinhar que decisões tomadas sem projeto podem encarecer a obra. | Economia estimada de **20–30%** no custo da fundação |
 |   |           |          |            |                            |         |
