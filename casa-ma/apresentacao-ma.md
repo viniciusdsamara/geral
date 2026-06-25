@@ -23,7 +23,6 @@
 - **Prazo:** contratual 12 meses; meta interna de 10 meses · obra em andamento
 - **Marco de produtividade:** estrutura completa — **casa levantada em 56 dias**
 - **Custo:** ~62% do valor total da obra executado (financeiro)
-- **Qualidade:** retrabalho, conformidade, entregas — _a preencher_
 - **Escopo / porte:** ~490 m² · steel frame · 12 frentes · pico de 18 colaboradores em 6 frentes simultâneas
 
 ## 2. A obra como case técnico — linha do tempo
