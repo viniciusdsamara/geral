@@ -17,12 +17,6 @@
 - **Prazo:** contratual 12 meses · meta interna 10 meses (em rota de cumprimento) · entrega adiada por **falta de financiamento do cliente** (fator externo)
 - **Equipe / frentes:** 12 frentes no total (nem todas simultâneas) · pico de **18 colaboradores de 6 frentes diferentes** trabalhando ao mesmo tempo
 
-### Minha trajetória na obra
-- **Início:** assistente do Victor — 2 meses como estagiário
-- **Novembro:** efetivado como **Auxiliar de Engenharia**
-- **Fim de fev / início de mar:** **responsável direto** pela obra
-- **Julho:** com a saída oficial do Victor, passo a **representar a Zait na região** (cargo atual: Auxiliar de Engenharia)
-
 ## 1. Resultados da obra
 > Números do início ao fim — preencher conforme a obra avança.
 
