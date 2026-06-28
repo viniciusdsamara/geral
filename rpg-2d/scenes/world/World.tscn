@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1world2drpg00"]
+
+[ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="1_player"]
+
+[node name="World" type="Node2D"]
+
+[node name="Background" type="ColorRect" parent="."]
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0.18, 0.26, 0.21, 1)
+
+[node name="HintLabel" type="Label" parent="."]
+offset_left = -150.0
+offset_top = -80.0
+offset_right = 150.0
+offset_bottom = -50.0
+text = "Use as setas ou WASD para andar"
+horizontal_alignment = 1
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(0, 0)

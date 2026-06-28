@@ -1,0 +1,20 @@
+# Godot 4+ específico
+.godot/
+
+# Pastas de exportação / builds
+/build/
+/export/
+*.tmp
+
+# Arquivos de importação gerados (mantemos os .import versionados, mas
+# a pasta de cache é descartável)
+.import/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Editores
+.vscode/
+.idea/
+*.swp
