@@ -10,34 +10,34 @@
     --ink:#e9ecf1; --muted:#9aa4b0; --gold:#c8a06a; --teal:#6f9bb0; --good:#7bbf9a;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
+  html{scroll-snap-type:y proximity;scroll-behavior:smooth}
   body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.5}
   .slide{min-height:100vh;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;
-    padding:7vh 8vw;position:relative;border-bottom:1px solid var(--line)}
-  .kick{text-transform:uppercase;letter-spacing:.24em;font-size:.72rem;font-weight:700;color:var(--gold);margin-bottom:18px}
+    padding:6vh 7vw;position:relative;border-bottom:1px solid var(--line)}
+  .kick{text-transform:uppercase;letter-spacing:.24em;font-size:.72rem;font-weight:700;color:var(--gold);margin-bottom:14px}
   h1{font-size:clamp(2.4rem,6vw,4rem);font-weight:800;letter-spacing:-.02em;line-height:1.04}
-  h2{font-size:clamp(1.5rem,3.4vw,2.2rem);font-weight:700;letter-spacing:-.01em;margin-bottom:6px}
-  .sub{color:var(--muted);max-width:60ch;font-size:1.05rem;margin-top:14px}
+  h2{font-size:clamp(1.4rem,3vw,2rem);font-weight:700;letter-spacing:-.01em;margin-bottom:4px}
+  .sub{color:var(--muted);max-width:62ch;font-size:1.02rem;margin-top:12px}
   .num{position:fixed;right:18px;bottom:16px;font-size:.74rem;color:var(--muted);letter-spacing:.1em;z-index:9}
   .hint{position:fixed;left:18px;bottom:16px;font-size:.72rem;color:#5b636e;z-index:9}
   b,strong{color:#fff;font-weight:650}
 
-  /* COVER / DASHBOARD */
-  .cover-tags{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
+  /* COVER */
+  .cover-tags{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}
   .ct{border:1px solid var(--line);color:#c9d1db;padding:6px 13px;border-radius:999px;font-size:.8rem;background:rgba(255,255,255,.02)}
-  .dash{display:flex;flex-direction:column;gap:16px;margin-top:34px}
+  .dash{display:flex;flex-direction:column;gap:14px;margin-top:30px}
   .statrow{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
   .chartrow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  .tile{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
-  .tile .n{font-size:1.9rem;font-weight:800;color:var(--gold);letter-spacing:-.02em}
+  .tile{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 20px}
+  .tile .n{font-size:1.8rem;font-weight:800;color:var(--gold);letter-spacing:-.02em}
   .tile .l{font-size:.8rem;color:var(--muted);margin-top:2px}
-  .chart{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 20px}
-  .chart .ct-title{font-size:.74rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:12px}
+  .chart{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 20px}
+  .chart .ct-title{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:10px}
   .bar{display:flex;align-items:center;gap:10px;margin:7px 0;font-size:.82rem}
-  .bar .bl{width:150px;color:#c9d1db;flex:none}
+  .bar .bl{width:158px;color:#c9d1db;flex:none}
   .bar .track{flex:1;height:9px;background:rgba(255,255,255,.06);border-radius:6px;overflow:hidden}
-  .bar .fill{height:100%;border-radius:6px}
+  .bar .fill{height:100%;border-radius:6px;background:var(--gold)}
   .bar .bv{width:18px;text-align:right;color:#fff;font-weight:700}
   .donut-wrap{display:flex;align-items:center;gap:18px}
   .legend{font-size:.78rem;color:#c9d1db}
@@ -45,50 +45,66 @@
   .dot{width:10px;height:10px;border-radius:3px;flex:none}
 
   /* INFO LIST */
-  .info{display:grid;grid-template-columns:1fr 1fr;gap:0 40px;margin-top:26px;max-width:900px}
+  .info{display:grid;grid-template-columns:1fr 1fr;gap:0 40px;margin-top:24px;max-width:900px}
   .info li{list-style:none;padding:11px 0;border-bottom:1px solid var(--line)}
   .info .k{display:block;text-transform:uppercase;letter-spacing:.09em;font-size:.66rem;color:var(--gold);font-weight:700;margin-bottom:3px}
   .info .v{font-size:.98rem;color:#dde2e8}
 
-  /* SUMÁRIO / TOC */
-  .toc{margin-top:24px;max-width:760px}
-  .toc .row{display:flex;align-items:baseline;gap:16px;padding:11px 0;border-bottom:1px solid var(--line)}
+  /* SUMÁRIO */
+  .toc{margin-top:20px;max-width:760px}
+  .toc .row{display:flex;align-items:baseline;gap:16px;padding:10px 0;border-bottom:1px solid var(--line)}
   .toc .tn{color:var(--gold);font-weight:700;font-size:.92rem;width:42px;flex:none}
-  .toc .tt{font-size:1.02rem;color:#dde2e8}
+  .toc .tt{font-size:1rem;color:#dde2e8}
   .toc .now{margin-left:auto;font-size:.64rem;text-transform:uppercase;letter-spacing:.07em;color:var(--teal);border:1px solid rgba(111,155,176,.4);padding:2px 9px;border-radius:999px;align-self:center}
   .toc .case{margin-left:auto;font-size:.64rem;text-transform:uppercase;letter-spacing:.07em;color:var(--gold);border:1px solid rgba(200,160,106,.4);padding:2px 9px;border-radius:999px;align-self:center}
 
-  /* PHASE (two-column with photo) */
-  .two{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-top:26px}
-  .pts li{list-style:none;padding:8px 0 8px 20px;position:relative;color:#cdd4dc;font-size:1rem}
-  .pts li::before{content:"";position:absolute;left:0;top:15px;width:7px;height:7px;border-radius:50%;background:var(--gold)}
+  /* PHASE LAYOUTS */
+  .phase-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:34px;align-items:start;margin-top:22px}
+  .pts li{list-style:none;padding:7px 0 7px 20px;position:relative;color:#cdd4dc;font-size:.95rem}
+  .pts li::before{content:"";position:absolute;left:0;top:14px;width:7px;height:7px;border-radius:50%;background:var(--gold)}
   .pts li b{color:#fff}
-  .obs{margin-top:16px;font-size:.84rem;color:#b9c1cb;border-left:2px solid var(--gold);padding:7px 0 7px 13px;line-height:1.5}
+  .obs{margin-top:14px;font-size:.83rem;color:#b9c1cb;border-left:2px solid var(--gold);padding:6px 0 6px 13px;line-height:1.5}
   .obs b{color:var(--gold)}
-  .photo{border:1.5px dashed rgba(255,255,255,.18);border-radius:16px;min-height:46vh;display:flex;
-    flex-direction:column;align-items:center;justify-content:center;color:#5f6772;background:rgba(255,255,255,.02);gap:6px}
-  .photo .ico{font-size:2rem;opacity:.5}
-  .photo small{font-size:.72rem;letter-spacing:.06em}
-  .tagline{display:inline-block;margin-top:8px;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;
-    color:#101216;background:var(--teal);padding:3px 10px;border-radius:999px;font-weight:700}
+  .specs{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+  .spec{font-size:.72rem;color:#c9d1db;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:7px;padding:4px 10px}
+  .spec b{color:var(--gold);font-weight:700}
+
+  /* PHOTO GRIDS with technical captions */
+  .pgrid{display:grid;gap:12px}
+  .pgrid.g2{grid-template-columns:1fr 1fr}
+  .pgrid.g1{grid-template-columns:1fr}
+  .ph{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .ph .img{border-bottom:1px solid var(--line);min-height:17vh;display:flex;align-items:center;justify-content:center;
+    color:#4d545e;background:repeating-linear-gradient(45deg,rgba(255,255,255,.015) 0 12px,transparent 12px 24px);font-size:1.4rem}
+  .ph.tall .img{min-height:26vh}
+  .ph .cap{padding:9px 12px;font-size:.74rem;color:#aeb7c2;line-height:1.45}
+  .ph .cap b{color:#e2c396;display:block;font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;margin-bottom:2px}
+
+  /* DIAGRAMS */
+  .diag{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .diag .d-title{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:10px}
+  .diag svg{width:100%;height:auto;display:block}
+  .diag text{font-family:inherit}
 
   /* CASE */
-  .case-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;margin-top:24px;align-items:center}
-  .lbl{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);font-weight:700;margin-top:16px}
+  .result{margin-top:14px;background:rgba(123,191,154,.1);border:1px solid rgba(123,191,154,.3);border-radius:10px;padding:11px 15px;color:var(--good);font-weight:600;font-size:.92rem}
+  .lbl{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);font-weight:700;margin-top:14px}
   .lbl:first-child{margin-top:0}
-  .case-grid p,.case-grid ul{color:#cdd4dc;font-size:.98rem;margin-top:5px}
-  .case-grid ul{margin-left:18px}
-  .result{margin-top:18px;background:rgba(123,191,154,.1);border:1px solid rgba(123,191,154,.3);border-radius:10px;padding:13px 16px;color:var(--good);font-weight:600}
+  .case-txt p,.case-txt ul{color:#cdd4dc;font-size:.93rem;margin-top:4px}
+  .case-txt ul{margin-left:18px}
+
+  .tagline{display:inline-block;margin-left:8px;font-size:.66rem;text-transform:uppercase;letter-spacing:.08em;
+    color:#101216;background:var(--teal);padding:3px 10px;border-radius:999px;font-weight:700;vertical-align:middle}
 
   /* SÍNTESE */
-  .big{font-size:clamp(1.4rem,3vw,2rem);font-weight:700;line-height:1.35;max-width:30ch;margin:6px 0 8px}
+  .big{font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:700;line-height:1.35;max-width:32ch;margin:6px 0 8px}
   .big span{color:var(--gold)}
-  .cols{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:26px}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:24px}
   .cols h4{color:var(--gold);font-size:.74rem;text-transform:uppercase;letter-spacing:.09em;margin-bottom:10px}
   .cols li{list-style:none;padding:6px 0 6px 18px;position:relative;color:#cdd4dc;font-size:.95rem}
   .cols li::before{content:"›";position:absolute;left:0;color:var(--gold)}
 
-  @media(max-width:820px){.statrow,.chartrow,.two,.case-grid,.cols,.info{grid-template-columns:1fr}.photo{min-height:34vh}}
+  @media(max-width:860px){.phase-grid,.chartrow,.cols,.info,.statrow{grid-template-columns:1fr}.pgrid.g2{grid-template-columns:1fr}}
   @media print{.slide{min-height:auto;page-break-after:always;border:none}.num,.hint{display:none}html{scroll-snap-type:none}}
 </style>
 </head>
@@ -97,7 +113,7 @@
 <div class="num" id="counter">1</div>
 <div class="hint">use ← → ou role a página</div>
 
-<!-- 1 · CAPA + DASHBOARD -->
+<!-- 1 · CAPA -->
 <section class="slide">
   <div class="kick">Apresentação de obra · Zait</div>
   <h1>Casa M&amp;A</h1>
@@ -106,7 +122,6 @@
     <span class="ct">Steel frame</span><span class="ct">506,25 m²</span>
     <span class="ct">Quinta do Golfe Reserva · Rio Preto/SP</span><span class="ct">12 frentes</span>
   </div>
-
   <div class="dash">
     <div class="statrow">
       <div class="tile"><div class="n">12</div><div class="l">frentes de serviço</div></div>
@@ -116,25 +131,25 @@
     <div class="chartrow">
       <div class="chart">
         <div class="ct-title">Lições aprendidas por área</div>
-        <div class="bar"><span class="bl">Projeto &amp; compatibilização</span><span class="track"><span class="fill" style="width:100%;background:var(--gold)"></span></span><span class="bv">5</span></div>
-        <div class="bar"><span class="bl">Execução técnica</span><span class="track"><span class="fill" style="width:80%;background:var(--teal)"></span></span><span class="bv">4</span></div>
-        <div class="bar"><span class="bl">Suprimentos &amp; normas</span><span class="track"><span class="fill" style="width:60%;background:rgba(255,255,255,.35)"></span></span><span class="bv">3</span></div>
+        <div class="bar"><span class="bl">Projeto &amp; compatibilização</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="bv">5</span></div>
+        <div class="bar"><span class="bl">Execução técnica</span><span class="track"><span class="fill" style="width:80%"></span></span><span class="bv">4</span></div>
+        <div class="bar"><span class="bl">Suprimentos &amp; normas</span><span class="track"><span class="fill" style="width:60%"></span></span><span class="bv">3</span></div>
       </div>
       <div class="chart">
         <div class="ct-title">Andamento da obra</div>
         <div class="donut-wrap">
-          <svg width="120" height="120" viewBox="0 0 140 140">
+          <svg width="112" height="112" viewBox="0 0 140 140">
             <g transform="rotate(-90 70 70)" fill="none" stroke-width="16">
               <circle cx="70" cy="70" r="54" stroke="rgba(255,255,255,.08)"/>
-              <circle cx="70" cy="70" r="54" stroke="var(--gold)" stroke-dasharray="215.9 339.3" stroke-dashoffset="0"/>
-              <circle cx="70" cy="70" r="54" stroke="var(--teal)" stroke-dasharray="30.8 339.3" stroke-dashoffset="-215.9"/>
+              <circle cx="70" cy="70" r="54" stroke="#c8a06a" stroke-dasharray="215.9 339.3" stroke-dashoffset="0"/>
+              <circle cx="70" cy="70" r="54" stroke="#6f9bb0" stroke-dasharray="30.8 339.3" stroke-dashoffset="-215.9"/>
             </g>
             <text x="70" y="66" text-anchor="middle" fill="#fff" font-size="20" font-weight="800">7/11</text>
             <text x="70" y="86" text-anchor="middle" fill="#9aa4b0" font-size="10" letter-spacing="1">ETAPAS</text>
           </svg>
           <div class="legend">
-            <div><span class="dot" style="background:var(--gold)"></span> Concluídas (7)</div>
-            <div><span class="dot" style="background:var(--teal)"></span> Em andamento (1)</div>
+            <div><span class="dot" style="background:#c8a06a"></span> Concluídas (7)</div>
+            <div><span class="dot" style="background:#6f9bb0"></span> Em andamento (1)</div>
             <div><span class="dot" style="background:rgba(255,255,255,.18)"></span> A iniciar (3)</div>
           </div>
         </div>
@@ -154,10 +169,12 @@
     <li><span class="k">Área construída</span><span class="v">506,25 m²</span></li>
     <li><span class="k">Prazo</span><span class="v">Contratual 12 meses · meta interna 10 meses</span></li>
     <li><span class="k">Equipe</span><span class="v">12 frentes · pico de 18 colaboradores em 6 frentes</span></li>
+    <li><span class="k">Cobertura</span><span class="v">Madeiramento metálico · telha cerâmica colonial</span></li>
+    <li><span class="k">Instalações</span><span class="v">PEX pressurizado · boiler a gás · VRV</span></li>
   </ul>
 </section>
 
-<!-- 3 · SUMÁRIO / LINHA DO TEMPO -->
+<!-- 3 · SUMÁRIO -->
 <section class="slide">
   <div class="kick">Sumário</div>
   <h2>Linha do tempo da obra</h2>
@@ -175,105 +192,200 @@
   </div>
 </section>
 
-<!-- 4 · 2.1 -->
+<!-- 4 · 2.1 TERRENO E FUNDAÇÃO -->
 <section class="slide">
   <div class="kick">Linha do tempo · 2.1</div>
   <h2>Terreno e fundação</h2>
-  <div class="two">
+  <div class="phase-grid">
     <div>
       <ul class="pts">
-        <li>Fundação dimensionada pelo <b>estudo do terreno</b> e pela distribuição de cargas.</li>
+        <li>Fundação dimensionada pelo <b>estudo do terreno (sondagem)</b> e pela distribuição de cargas da casa.</li>
+        <li>Baldrames executadas no <b>nível do piso acabado</b> — decisão que protege os painéis de esforços laterais e umidade.</li>
         <li>Início por opção do cliente, antes do projeto de fundações concluído.</li>
       </ul>
+      <div class="specs">
+        <span class="spec"><b>Sondagem</b> base do dimensionamento</span>
+        <span class="spec"><b>Baldrame</b> no nível do piso acabado</span>
+        <span class="spec"><b>Casa</b> +15 cm sobre o piso externo</span>
+      </div>
       <div class="obs"><b>Obs (lição):</b> um aterro com compactação controlada baratearia a fundação em 20 a 30%.</div>
     </div>
-    <!-- Para inserir a foto, troque a div abaixo por: <img src="fotos/2-1.jpg" style="width:100%;border-radius:16px"> -->
-    <div class="photo"><span class="ico">📷</span><small>FOTO DA FASE</small></div>
+    <div class="pgrid g2">
+      <!-- Para inserir fotos: troque <div class="img">📷</div> por <img src="fotos/arquivo.jpg" style="width:100%;display:block"> -->
+      <div class="ph"><div class="img">📷</div><div class="cap"><b>Preparo do terreno</b>Compactação e platô pronto para locação da obra.</div></div>
+      <div class="ph"><div class="img">📷</div><div class="cap"><b>Armadura das baldrames</b>Ferragem montada antes da concretagem.</div></div>
+      <div class="ph"><div class="img">📷</div><div class="cap"><b>Concretagem</b>Baldrames concretadas no nível do piso acabado.</div></div>
+      <div class="ph"><div class="img">📷</div><div class="cap"><b>Fundação concluída</b>Base pronta para recebimento dos painéis.</div></div>
+    </div>
   </div>
 </section>
 
-<!-- 5 · 2.2 -->
+<!-- 5 · 2.2 ESTRUTURA -->
 <section class="slide">
   <div class="kick">Linha do tempo · 2.2</div>
   <h2>Estrutura steel frame</h2>
-  <div class="two">
+  <div class="phase-grid">
     <div>
       <ul class="pts">
-        <li><b>Estrutura de painéis levantada em 56 dias.</b></li>
-        <li>Painéis fixados nas baldrames, no nível do piso acabado.</li>
-        <li><b>Anticorrosão:</b> manta asfáltica aluminizada no contato com cimento.</li>
-        <li><b>Controle de qualidade:</b> conferência de parafusamento com 2 sprays (verde = ok / vermelho = falta).</li>
+        <li>Estrutura de painéis levantada em <b>56 dias</b>.</li>
+        <li>Painéis fixados nas baldrames, <b>acima do contrapiso</b> — sem esforços laterais no perfil.</li>
+        <li><b>Anticorrosão:</b> manta asfáltica aluminizada em todo contato aço × concreto/cimento (isola a corrosão química).</li>
+        <li>Esquadro e prumo aferidos a cada pavimento.</li>
       </ul>
-      <div class="obs"><b>Obs (lições):</b> escorar o térreo quando há carga alta no pavimento superior; pedir os perfis com furação no máximo de pontos.</div>
+      <div class="specs">
+        <span class="spec"><b>56 dias</b> de montagem</span>
+        <span class="spec"><b>Manta aluminizada</b> anticorrosão</span>
+        <span class="spec"><b>Spray verde</b> parafuso conferido</span>
+        <span class="spec"><b>Spray vermelho</b> ponto faltante</span>
+      </div>
+      <div class="obs"><b>Obs (lições):</b> escorar o térreo quando há carga alta no pavimento superior (~12 t de telha) — algumas paredes saíram do prumo na cobertura; pedir os perfis com furação no máximo de pontos, evitando cortes em obra.</div>
     </div>
-    <div class="photo"><span class="ico">📷</span><small>FOTO DA FASE</small></div>
+    <div class="pgrid g2">
+      <div class="ph"><div class="img">📷</div><div class="cap"><b>Fixação na baldrame</b>Painel apoiado sobre manta asfáltica aluminizada — barreira química aço × cimento.</div></div>
+      <div class="ph"><div class="img">📷</div><div class="cap"><b>Controle de parafusamento</b>Sistema de dupla marcação: verde = conferido · vermelho = a corrigir.</div></div>
+      <div class="ph"><div class="img">📷</div><div class="cap"><b>Prumo e esquadro</b>Aferição a cada subida de pavimento.</div></div>
+      <div class="ph"><div class="img">📷</div><div class="cap"><b>Estrutura completa</b>Os dois pavimentos montados — 56 dias de execução.</div></div>
+    </div>
   </div>
 </section>
 
-<!-- 6 · 2.3 -->
+<!-- 6 · 2.3 ENTREPISO -->
 <section class="slide">
   <div class="kick">Linha do tempo · 2.3</div>
   <h2>Entrepiso / laje</h2>
-  <div class="two">
+  <div class="phase-grid">
     <div>
-      <ul class="pts">
-        <li>Banda acústica → plywood → manta líquida → painéis → <b>contrapiso em concreto leve (EPS)</b>.</li>
-        <li>Cuidado acústico desde a laje.</li>
-      </ul>
-      <div class="obs"><b>Obs (lição):</b> quando a altura permitir, concretar logo após o plywood — melhor nivelamento e proteção das madeiras.</div>
+      <div class="diag">
+        <div class="d-title">Corte esquemático — composição do entrepiso</div>
+        <svg viewBox="0 0 420 210">
+          <!-- camadas de baixo pra cima -->
+          <g font-size="11" fill="#cdd4dc">
+            <rect x="10" y="168" width="250" height="22" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.2)"/>
+            <text x="270" y="183">1 · Estrutura (perfis)</text>
+            <rect x="10" y="144" width="250" height="20" fill="rgba(111,155,176,.35)" stroke="#6f9bb0"/>
+            <text x="270" y="158">2 · Banda acústica</text>
+            <rect x="10" y="118" width="250" height="22" fill="rgba(200,160,106,.35)" stroke="#c8a06a"/>
+            <text x="270" y="133">3 · Plywood parafusado</text>
+            <rect x="10" y="96" width="250" height="18" fill="rgba(123,191,154,.3)" stroke="#7bbf9a"/>
+            <text x="270" y="110">4 · Manta líquida (impermeab.)</text>
+            <rect x="10" y="58" width="250" height="34" fill="rgba(255,255,255,.10)" stroke="rgba(255,255,255,.3)"/>
+            <text x="270" y="79">5 · Contrapiso concreto leve</text>
+            <text x="270" y="92" fill="#9aa4b0" font-size="9.5">agregado EPS</text>
+            <rect x="10" y="40" width="250" height="14" fill="rgba(200,160,106,.2)" stroke="rgba(200,160,106,.5)" stroke-dasharray="3 3"/>
+            <text x="270" y="52">6 · Revestimento final</text>
+          </g>
+        </svg>
+      </div>
+      <div class="obs"><b>Obs (lição):</b> quando a altura permitir, concretar logo após o plywood — melhor nivelamento e proteção das madeiras. Aqui o pé-direito era limitado pela escada e pelo gabarito do condomínio.</div>
     </div>
-    <div class="photo"><span class="ico">📷</span><small>FOTO DA FASE</small></div>
+    <div class="pgrid g2">
+      <div class="ph"><div class="img">📷</div><div class="cap"><b>Banda acústica + plywood</b>Isolamento do ruído de impacto antes do assoalho.</div></div>
+      <div class="ph"><div class="img">📷</div><div class="cap"><b>Manta líquida aplicada</b>Impermeabilização sobre o plywood.</div></div>
+      <div class="ph tall" style="grid-column:1/-1"><div class="img">📷</div><div class="cap"><b>Contrapiso em concreto leve (EPS)</b>Reduz peso próprio sobre a estrutura mantendo a rigidez do piso.</div></div>
+    </div>
   </div>
 </section>
 
-<!-- 7 · 2.4 -->
+<!-- 7 · 2.4 COBERTURA -->
 <section class="slide">
   <div class="kick">Linha do tempo · 2.4</div>
   <h2>Cobertura</h2>
-  <div class="two">
+  <div class="phase-grid">
     <div>
       <ul class="pts">
-        <li><b>Madeiramento metálico</b> — coerência com o steel frame.</li>
-        <li>Telhas Maristela coloniais (~4 kg), <b>amarradas uma a uma</b>.</li>
-        <li>Beiral em garapa; testeira ampliada para esconder a estrutura metálica.</li>
+        <li><b>Madeiramento metálico</b> — um único sistema construtivo do início ao fim, sem misturar madeira estrutural com aço.</li>
+        <li>Telhas <b>Maristela coloniais (capa/canal), ~4 kg cada</b> — carga total de <b>~12 toneladas</b> sobre o pavimento superior.</li>
+        <li>Cada telha <b>amarrada individualmente</b> — nenhuma peça solta sobre estrutura leve.</li>
+        <li>Beiral em <b>garapa maciça</b>; testeira ampliada para ocultar a estrutura metálica.</li>
       </ul>
+      <div class="specs">
+        <span class="spec"><b>~12 t</b> de telha cerâmica</span>
+        <span class="spec"><b>4 kg</b> por telha, amarrada 1 a 1</span>
+        <span class="spec"><b>Garapa</b> no beiral</span>
+      </div>
       <div class="obs"><b>Obs (lição):</b> compatibilizar estrutural × arquitetônico antes da obra, sobretudo em pontos visíveis (testeira/beiral).</div>
     </div>
-    <div class="photo"><span class="ico">📷</span><small>FOTO DA FASE</small></div>
+    <div class="pgrid g2">
+      <div class="ph"><div class="img">📷</div><div class="cap"><b>Madeiramento metálico</b>Estrutura da cobertura íntegra ao sistema steel frame.</div></div>
+      <div class="ph"><div class="img">📷</div><div class="cap"><b>Amarração das telhas</b>Fixação individual de cada peça capa/canal.</div></div>
+      <div class="ph"><div class="img">📷</div><div class="cap"><b>Beiral em garapa</b>Madeira maciça com testeira dimensionada em obra.</div></div>
+      <div class="ph"><div class="img">📷</div><div class="cap"><b>Cobertura concluída</b>Vista geral do telhado colonial finalizado.</div></div>
+    </div>
   </div>
 </section>
 
-<!-- 8 · 2.5 -->
+<!-- 8 · 2.5 FECHAMENTOS -->
 <section class="slide">
   <div class="kick">Linha do tempo · 2.5</div>
   <h2>Fechamentos e fachada</h2>
-  <div class="two">
+  <div class="phase-grid">
     <div>
-      <ul class="pts">
-        <li>Parede: plywood 10 mm + <b>manta hidrófuga</b> + cimentícia 10 mm.</li>
-        <li>Fachada decorativa em <b>meio tijolo de demolição</b> (argamassa ACIII).</li>
-        <li>Perfil de alumínio a cada 1 m para apoio da fachada.</li>
-      </ul>
-      <div class="obs"><b>Obs (lição):</b> a placa cimentícia foi comprada com a espessura errada (entendida como 8 mm, era 10 mm) — alinhar a especificação exata no pedido de compra. Juntas e parafusamento conforme norma desde o início.</div>
+      <div class="diag">
+        <div class="d-title">Corte esquemático — parede externa (de dentro pra fora)</div>
+        <svg viewBox="0 0 420 200">
+          <g font-size="11" fill="#cdd4dc">
+            <rect x="10" y="14" width="52" height="150" fill="rgba(200,160,106,.35)" stroke="#c8a06a"/>
+            <text x="36" y="178" text-anchor="middle" font-size="9.5" fill="#9aa4b0">plywood</text>
+            <text x="36" y="10" text-anchor="middle" font-size="9.5" fill="#9aa4b0">10 mm</text>
+            <rect x="66" y="14" width="16" height="150" fill="rgba(123,191,154,.35)" stroke="#7bbf9a"/>
+            <text x="74" y="192" text-anchor="middle" font-size="9.5" fill="#9aa4b0">manta</text>
+            <rect x="86" y="14" width="52" height="150" fill="rgba(255,255,255,.10)" stroke="rgba(255,255,255,.35)"/>
+            <text x="112" y="178" text-anchor="middle" font-size="9.5" fill="#9aa4b0">cimentícia</text>
+            <text x="112" y="10" text-anchor="middle" font-size="9.5" fill="#9aa4b0">10 mm</text>
+            <rect x="142" y="14" width="14" height="150" fill="rgba(111,155,176,.35)" stroke="#6f9bb0"/>
+            <text x="149" y="192" text-anchor="middle" font-size="9.5" fill="#9aa4b0">base coat</text>
+            <rect x="160" y="14" width="44" height="150" fill="rgba(200,120,80,.3)" stroke="rgba(220,140,95,.6)"/>
+            <text x="188" y="178" text-anchor="middle" font-size="9.5" fill="#9aa4b0">tijolo demol.</text>
+            <!-- perfil alumínio -->
+            <line x1="160" y1="64" x2="204" y2="64" stroke="#e9ecf1" stroke-width="2.4"/>
+            <line x1="160" y1="114" x2="204" y2="114" stroke="#e9ecf1" stroke-width="2.4"/>
+            <text x="214" y="68" font-size="10" fill="#e9ecf1">perfil de alumínio</text>
+            <text x="214" y="82" font-size="9.5" fill="#9aa4b0">a cada 1 m — suporta a fachada</text>
+            <text x="214" y="118" font-size="10" fill="#e9ecf1">assentamento ACIII branca</text>
+            <!-- setas vapor/umidade -->
+            <text x="240" y="146" font-size="9.5" fill="#7bbf9a">manta hidrófuga: sai vapor ⇢</text>
+            <text x="240" y="160" font-size="9.5" fill="#7bbf9a">⇠ barra umidade externa</text>
+          </g>
+        </svg>
+      </div>
+      <div class="obs"><b>Obs (lição):</b> a placa cimentícia foi comprada com a espessura errada (entendida como 8 mm, era 10 mm) — alinhar a especificação exata no pedido de compra. Juntas e parafusamento executados conforme norma.</div>
     </div>
-    <div class="photo"><span class="ico">📷</span><small>FOTO DA FASE</small></div>
+    <div class="pgrid g2">
+      <div class="ph"><div class="img">📷</div><div class="cap"><b>Plaqueamento externo</b>Plywood + manta hidrófuga + cimentícia — antes do beiral, que dá o acabamento superior.</div></div>
+      <div class="ph"><div class="img">📷</div><div class="cap"><b>Tratamento de juntas + base coat</b>Juntas entre placas e entre pavimentos conforme norma.</div></div>
+      <div class="ph"><div class="img">📷</div><div class="cap"><b>Perfis de alumínio</b>Linha de apoio a cada 1 m de fachada.</div></div>
+      <div class="ph"><div class="img">📷</div><div class="cap"><b>Fachada em tijolo de demolição</b>Meios tijolos assentados com ACIII branca.</div></div>
+    </div>
   </div>
 </section>
 
-<!-- 9 · 2.6 -->
+<!-- 9 · 2.6 INSTALAÇÕES -->
 <section class="slide">
   <div class="kick">Linha do tempo · 2.6</div>
   <h2>Instalações</h2>
-  <div class="two">
+  <div class="phase-grid">
     <div>
       <ul class="pts">
-        <li>Hidráulica em <b>PEX</b>; infra reprojetada do chão para o entreforro/paredes (pressurização + boiler).</li>
-        <li>Elétrica no entreforro; <b>VRV</b> (dutada na sala/suíte, cassetes nos demais).</li>
-        <li><b>Ponto crítico:</b> travessia das baldrames (interno↔externo) — prevista, mas difícil de executar.</li>
+        <li>Hidráulica 100% em <b>PEX</b>, distribuição <b>estilo predial</b>: rede pressurizada (compressor) + aquecimento a gás com <b>boiler</b>.</li>
+        <li>Infra redistribuída do chão para o <b>entreforro e paredes</b> — a solução adequada ao steel frame.</li>
+        <li>Traçado com <b>mínimo de cotovelos</b>, preservando pressão na rede.</li>
+        <li>PEX travado com <b>espuma expansiva + fita Valsiva</b> — sem ruído de movimentação dentro das paredes.</li>
+        <li>Climatização <b>VRV</b>: dutada na sala e suíte do casal, cassetes nos demais ambientes.</li>
       </ul>
-      <div class="obs"><b>Obs (timing de projeto):</b> infra projetada pelo entreforro/paredes; luminotécnico e pontos de AC definidos antes de executar/fechar; mangas embutidas nas baldrames na concretagem.</div>
+      <div class="specs">
+        <span class="spec"><b>PEX</b> pressurizado</span>
+        <span class="spec"><b>Boiler</b> a gás</span>
+        <span class="spec"><b>VRV</b> dutada + cassetes</span>
+        <span class="spec"><b>Travessia</b> de baldrame c/ ajuste de armadura</span>
+      </div>
+      <div class="obs"><b>Obs (timing de projeto):</b> luminotécnico e pontos de AC chegaram após execução/fechamento — definições nessa sequência geram retrabalho; mangas embutidas nas baldrames na concretagem facilitam as travessias.</div>
     </div>
-    <div class="photo"><span class="ico">📷</span><small>FOTO DA FASE</small></div>
+    <div class="pgrid g2">
+      <div class="ph"><div class="img">📷</div><div class="cap"><b>Distribuição no entreforro</b>Rede PEX e eletrodutos organizados — padrão predial.</div></div>
+      <div class="ph"><div class="img">📷</div><div class="cap"><b>Fixação anti-ruído</b>Espuma expansiva e fita Valsiva travando a tubulação.</div></div>
+      <div class="ph"><div class="img">📷</div><div class="cap"><b>Travessia da baldrame</b>Transição interno↔externo com ajuste de concreto e armadura.</div></div>
+      <div class="ph"><div class="img">📷</div><div class="cap"><b>VRV / máquina dutada</b>Climatização embutida no forro da sala e suíte.</div></div>
+    </div>
   </div>
 </section>
 
@@ -281,46 +393,97 @@
 <section class="slide">
   <div class="kick">Case em destaque · 2.7</div>
   <h2>Impermeabilização e estanqueidade dos banheiros</h2>
-  <div class="case-grid">
-    <div>
+  <div class="phase-grid">
+    <div class="case-txt">
       <div class="lbl">Desafio</div>
-      <p>Impermeabilizar e passar no teste de estanqueidade com contrapiso muito fino (em pontos só ~2 cm sobre o Plywood) e ralos lineares colados na parede.</p>
-      <div class="lbl">Solução técnica</div>
+      <p>Garantir estanqueidade com contrapiso de apenas <b>~2 cm sobre o plywood</b> em pontos críticos, e <b>ralos lineares encostados na parede</b> — o encontro piso/parede mais difícil de vedar.</p>
+      <div class="lbl">Solução de engenharia</div>
       <ul>
-        <li>Caixas de concreto sob o Plywood para travar ralos e encanamento.</li>
-        <li>Aditivo impermeabilizante e refazimento de pontos estratégicos.</li>
-        <li>Argamassa polimérica flexível com fibras.</li>
+        <li><b>Caixas de concreto sob o plywood</b> travando ralos e encanamento — elimina a movimentação que rompe a vedação.</li>
+        <li><b>Aditivo impermeabilizante</b> no concreto + refazimento de pontos estratégicos.</li>
+        <li><b>Argamassa polimérica flexível com fibras</b> — acompanha o movimento do piso sem fissurar.</li>
       </ul>
-      <div class="result">✓ Impermeabilização sanada e estanqueidade resolvida.</div>
+      <div class="result">✓ Teste de estanqueidade aprovado — vedação resolvida.</div>
       <div class="obs"><b>Obs (lição):</b> adotar um rebaixo de ~10 cm nas áreas molhadas nos próximos projetos de steel frame.</div>
     </div>
-    <div class="photo"><span class="ico">📷</span><small>FOTO DA FASE</small></div>
+    <div>
+      <div class="diag">
+        <div class="d-title">Corte esquemático — detalhe do ralo linear</div>
+        <svg viewBox="0 0 420 200">
+          <g font-size="10" fill="#cdd4dc">
+            <!-- parede -->
+            <rect x="330" y="10" width="24" height="150" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.25)"/>
+            <text x="342" y="176" text-anchor="middle" font-size="9.5" fill="#9aa4b0">parede</text>
+            <!-- plywood -->
+            <rect x="20" y="120" width="310" height="16" fill="rgba(200,160,106,.35)" stroke="#c8a06a"/>
+            <text x="24" y="150" fill="#9aa4b0" font-size="9.5">plywood estrutural</text>
+            <!-- contrapiso fino -->
+            <rect x="20" y="96" width="310" height="24" fill="rgba(255,255,255,.10)" stroke="rgba(255,255,255,.3)"/>
+            <text x="24" y="90" fill="#9aa4b0" font-size="9.5">contrapiso ~2 cm + aditivo impermeabilizante</text>
+            <!-- ralo linear -->
+            <rect x="288" y="88" width="42" height="32" fill="rgba(111,155,176,.4)" stroke="#6f9bb0"/>
+            <text x="288" y="82" fill="#6f9bb0" font-size="9.5">ralo linear junto à parede</text>
+            <!-- caixa de concreto -->
+            <rect x="266" y="136" width="58" height="34" fill="rgba(123,191,154,.28)" stroke="#7bbf9a"/>
+            <text x="140" y="158" fill="#7bbf9a" font-size="9.5">caixa de concreto sob o plywood —</text>
+            <text x="140" y="170" fill="#7bbf9a" font-size="9.5">trava ralo e encanamento</text>
+            <!-- camada polimérica -->
+            <line x1="20" y1="96" x2="330" y2="96" stroke="#7bbf9a" stroke-width="2.5"/>
+            <text x="24" y="112" fill="#7bbf9a" font-size="9.5">argamassa polimérica flexível c/ fibras</text>
+          </g>
+        </svg>
+      </div>
+      <div class="pgrid g2" style="margin-top:12px">
+        <div class="ph"><div class="img">📷</div><div class="cap"><b>Caixa de travamento</b>Concreto sob o plywood fixando o conjunto do ralo.</div></div>
+        <div class="ph"><div class="img">📷</div><div class="cap"><b>Teste de estanqueidade</b>Lâmina d'água — vedação aprovada.</div></div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- 11 · 2.8 -->
+<!-- 11 · 2.8 ACABAMENTOS -->
 <section class="slide">
   <div class="kick">Linha do tempo · 2.8</div>
   <h2>Acabamentos internos <span class="tagline">ponto atual</span></h2>
-  <div class="two">
-    <ul class="pts">
-      <li>Fechamento interno (gesso Performa + lã de PET); técnica dos requadros para cravar a locação das esquadrias.</li>
-      <li>Forros (superior concluído; térreo com lã de rocha), paredes amaciadas, pergolados internos.</li>
-      <li><b>Destaque:</b> cuidado acústico em 3 camadas (entrepiso, paredes, forro).</li>
-    </ul>
-    <div class="photo"><span class="ico">📷</span><small>FOTO DA FASE</small></div>
+  <div class="phase-grid">
+    <div>
+      <ul class="pts">
+        <li>Fechamento interno em <b>gesso Performa + lã de PET</b>.</li>
+        <li><b>Técnica dos requadros:</b> vãos das janelas deixados ~10 cm maiores de propósito e plaqueados até a medida exata — locação das esquadrias garantida.</li>
+        <li>Forro do superior concluído; térreo com <b>lã de rocha</b> contra ruído entre pavimentos.</li>
+        <li>Paredes do superior <b>amaciadas</b>; pergolados de madeira no corredor, garagem, estar e gourmet.</li>
+      </ul>
+      <div class="specs">
+        <span class="spec"><b>Acústica em 3 camadas</b></span>
+        <span class="spec"><b>1.</b> banda acústica no entrepiso</span>
+        <span class="spec"><b>2.</b> lã de PET nas paredes</span>
+        <span class="spec"><b>3.</b> lã de rocha no forro</span>
+      </div>
+    </div>
+    <div class="pgrid g2">
+      <div class="ph"><div class="img">📷</div><div class="cap"><b>Paredes internas</b>Gesso Performa com enchimento em lã de PET.</div></div>
+      <div class="ph"><div class="img">📷</div><div class="cap"><b>Requadro de janela</b>Vão ajustado por plaqueamento até a medida da esquadria.</div></div>
+      <div class="ph"><div class="img">📷</div><div class="cap"><b>Forro com lã de rocha</b>Isolamento acústico entre pavimentos.</div></div>
+      <div class="ph"><div class="img">📷</div><div class="cap"><b>Pergolados internos</b>Madeiramento no corredor, garagem, estar e gourmet.</div></div>
+    </div>
   </div>
 </section>
 
-<!-- 12 · 2.10 -->
+<!-- 12 · 2.10 ÁREA EXTERNA -->
 <section class="slide">
   <div class="kick">Linha do tempo · 2.10</div>
   <h2>Área externa</h2>
-  <div class="two">
-    <ul class="pts">
-      <li>Piscina executada, impermeabilizada e com <b>teste de estanqueidade</b> realizado.</li>
-    </ul>
-    <div class="photo"><span class="ico">📷</span><small>FOTO DA FASE</small></div>
+  <div class="phase-grid">
+    <div>
+      <ul class="pts">
+        <li>Piscina executada e impermeabilizada, com <b>teste de estanqueidade aprovado</b> após a impermeabilização.</li>
+        <li>Demais frentes externas em sequência conforme avanço da obra.</li>
+      </ul>
+    </div>
+    <div class="pgrid g2">
+      <div class="ph"><div class="img">📷</div><div class="cap"><b>Estrutura da piscina</b>Concluída e impermeabilizada.</div></div>
+      <div class="ph"><div class="img">📷</div><div class="cap"><b>Teste de estanqueidade</b>Verificação de nível pós-impermeabilização — aprovado.</div></div>
+    </div>
   </div>
 </section>
 
@@ -340,9 +503,9 @@
     <div>
       <h4>Como a obra respondeu</h4>
       <ul>
-        <li>Produtividade: estrutura de painéis levantada em 56 dias.</li>
-        <li>Rigor técnico: anticorrosão, acústica em camadas, controle de parafusamento.</li>
-        <li>Problemas difíceis resolvidos e 12 lições para a próxima obra.</li>
+        <li>Estrutura de painéis levantada em 56 dias.</li>
+        <li>Rigor técnico: anticorrosão, acústica em 3 camadas, controle visual de parafusamento, testes de estanqueidade.</li>
+        <li>Problemas difíceis resolvidos em campo e 12 lições registradas para a próxima obra.</li>
       </ul>
     </div>
   </div>
