@@ -31,6 +31,7 @@ Sou o **Vinícius**, trabalho com engenharia civil na **Zait**, em **São José 
 
 | Arquivo | O que é |
 |---|---|
+| `obras.md` | Track record das minhas obras (RL, M&A e próximas): papel, contexto, destaques técnicos |
 | `licoes-aprendidas.md` | Registro pessoal de lições (RL e futuras obras). Só entra coisa real, vivida. |
 | `casa-ma/apresentacao-ma.md` | Documento de trabalho com todo o conteúdo da obra M&A (fonte da apresentação) |
 | `casa-ma/apresentacao-ma.html` | **Apresentação da Casa M&A** (slide deck dark, navegável, para apresentar à empresa) |
