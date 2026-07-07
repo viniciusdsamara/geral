@@ -48,6 +48,14 @@ export interface Aprendizado {
   created_at: string
 }
 
+export interface Retrospectiva {
+  id: string
+  semana_inicio: string
+  semana_fim: string
+  conteudo_md: string
+  created_at: string
+}
+
 export interface Tarefa {
   id: string
   data: string

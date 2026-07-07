@@ -7,6 +7,14 @@ App pessoal de uso diário: **Relatório Diário de Obra (RDO)** + **registro de
 - **Hoje** — três anéis de progresso do dia (RDO preenchido, aprendizado registrado, tarefas concluídas) e a lista de tarefas do dia.
 - **RDO** — clima (manhã/tarde, praticável ou não), efetivo por função, serviços executados com % de avanço, equipamentos, ocorrências e fotos. Um RDO por obra por dia, com navegação pelo histórico. Salva automaticamente.
 - **Aprendizado** — registro rápido de texto com assunto (você cria os assuntos conforme surgem) e uma roda de distribuição mostrando onde seu aprendizado se concentrou nos últimos 30 dias.
+- **Evolução** — retrospectivas semanais escritas automaticamente por um agente (ver abaixo).
+
+## Retrospectiva semanal automática
+
+Todo domingo à tarde, uma Routine do Claude Code dispara uma sessão que analisa os aprendizados, RDOs e tarefas da semana e escreve uma retrospectiva (progressão, pontos críticos aprendidos, resumo da obra e sugestões). O resultado vai para dois lugares, sempre **incrementando, nunca reescrevendo**:
+
+- [`RETROSPECTIVA.md`](./RETROSPECTIVA.md) — o documento permanente, uma seção nova por semana no final do arquivo;
+- tabela `retrospectivas` no Supabase — que alimenta a aba **Evolução** do app (o app só tem permissão de leitura nessa tabela).
 
 ## Stack
 

@@ -8,6 +8,7 @@ import ObraSetup from './screens/ObraSetup'
 import Hoje from './screens/Hoje'
 import Rdo from './screens/Rdo'
 import Aprendizado from './screens/Aprendizado'
+import Evolucao from './screens/Evolucao'
 
 export default function App() {
   const [session, setSession] = useState<Session | null | undefined>(undefined)
@@ -56,6 +57,7 @@ export default function App() {
       {aba === 'hoje' && <Hoje userId={userId} obra={obra} onObraMudou={carregarObra} />}
       {aba === 'rdo' && <Rdo userId={userId} obra={obra} />}
       {aba === 'aprendizado' && <Aprendizado userId={userId} />}
+      {aba === 'evolucao' && <Evolucao />}
       <TabBar aba={aba} onMudar={setAba} />
     </div>
   )
