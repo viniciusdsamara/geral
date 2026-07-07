@@ -27,6 +27,7 @@ export default function Rdo({ userId, obra }: Props) {
   const [servicos, setServicos] = useState<ServicoItem[]>([])
   const [equipamentos, setEquipamentos] = useState('')
   const [ocorrencias, setOcorrencias] = useState('')
+  const [relato, setRelato] = useState('')
   const [fotos, setFotos] = useState<FotoComUrl[]>([])
   const [sujo, setSujo] = useState(false)
   const [salvando, setSalvando] = useState(false)
@@ -70,6 +71,7 @@ export default function Rdo({ userId, obra }: Props) {
     setServicos(rdo?.servicos ?? [])
     setEquipamentos(rdo?.equipamentos ?? '')
     setOcorrencias(rdo?.ocorrencias ?? '')
+    setRelato(rdo?.relato ?? '')
     setSujo(false)
     if (rdo) carregarFotos(rdo.id)
     else setFotos([])
@@ -100,7 +102,7 @@ export default function Rdo({ userId, obra }: Props) {
     }, 1000)
     return () => clearTimeout(timer)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sujo, climaManha, climaTarde, praticavelManha, praticavelTarde, efetivo, servicos, equipamentos, ocorrencias])
+  }, [sujo, climaManha, climaTarde, praticavelManha, praticavelTarde, efetivo, servicos, equipamentos, ocorrencias, relato])
 
   function marcar<T>(setter: (v: T) => void) {
     return (v: T) => {
@@ -126,6 +128,7 @@ export default function Rdo({ userId, obra }: Props) {
           servicos,
           equipamentos: equipamentos || null,
           ocorrencias: ocorrencias || null,
+          relato: relato || null,
           updated_at: new Date().toISOString(),
         },
         { onConflict: 'obra_id,data' },
@@ -403,6 +406,17 @@ export default function Rdo({ userId, obra }: Props) {
       </section>
 
       <section className="rounded-2xl border border-hairline bg-surface p-4">
+        <h2 className="mb-3 text-sm font-semibold">Relato do dia</h2>
+        <textarea
+          value={relato}
+          onChange={(e) => marcar(setRelato)(e.target.value)}
+          placeholder="O que aconteceu na obra hoje? Frentes de trabalho, visitas, decisões, conversas com cliente…"
+          rows={4}
+          className="w-full resize-none rounded-xl border border-hairline bg-bg px-3 py-2 text-sm outline-none focus:border-accent"
+        />
+      </section>
+
+      <section className="rounded-2xl border border-hairline bg-surface p-4">
         <h2 className="mb-3 text-sm font-semibold">Equipamentos</h2>
         <textarea
           value={equipamentos}
@@ -418,7 +432,7 @@ export default function Rdo({ userId, obra }: Props) {
         <textarea
           value={ocorrencias}
           onChange={(e) => marcar(setOcorrencias)(e.target.value)}
-          placeholder="Atrasos, faltas, interferências, visitas…"
+          placeholder="Atrasos, faltas, acidentes, interferências…"
           rows={3}
           className="w-full resize-none rounded-xl border border-hairline bg-bg px-3 py-2 text-sm outline-none focus:border-accent"
         />

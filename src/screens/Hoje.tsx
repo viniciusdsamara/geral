@@ -18,10 +18,11 @@ function progressoRdo(r: Rdo | null): { valor: number; detalhe: string } {
     Boolean(r.clima_manha || r.clima_tarde),
     r.efetivo.length > 0,
     r.servicos.length > 0,
+    Boolean(r.relato),
     Boolean(r.equipamentos || r.ocorrencias),
   ]
   const n = secoes.filter(Boolean).length
-  return { valor: n / 4, detalhe: `${n} de 4 seções` }
+  return { valor: n / 5, detalhe: `${n} de 5 seções` }
 }
 
 export default function Hoje({ userId, obra, onObraMudou, ehAdmin, onAbrirAdmin }: Props) {

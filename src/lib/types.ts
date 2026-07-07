@@ -34,6 +34,7 @@ export interface Rdo {
   servicos: ServicoItem[]
   equipamentos: string | null
   ocorrencias: string | null
+  relato: string | null
 }
 
 export interface RdoFoto {
@@ -61,6 +62,7 @@ export interface Retrospectiva {
   semana_inicio: string
   semana_fim: string
   conteudo_md: string
+  tipo: 'evolucao' | 'resumo'
   created_at: string
 }
 
