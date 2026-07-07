@@ -34,3 +34,26 @@
 - **Luminotécnico:** fechar o projeto luminotécnico antes de executar os pontos elétricos. Ele chegou depois dos pontos prontos e gerou retrabalho.
 - **Ar condicionado:** definir os pontos de AC antes do plaqueamento das paredes. A instalação do VRV exigiu alterações depois das paredes fechadas.
 - **Travessias de baldrame:** embutir mangas nas baldrames durante a concretagem. As passagens estavam previstas, mas a execução exigiu ajuste de concreto e armadura em vários pontos, agravada pelo início da fundação simultâneo à entrega do projeto.
+
+## Semana de 03/07/2026 a 09/07/2026
+
+### Progressão
+- Primeira retrospectiva: **16 aprendizados** em **8 assuntos** entraram no app, consolidando as lições das obras Casa RL e Casa M&A.
+- Steel frame e Compatibilização de projetos concentram **metade dos registros** (4 cada) — é onde sua atenção está, e faz sentido: é o sistema da obra atual.
+- A Casa M&A está ativa no app; RDOs e tarefas começam a contar a partir de agora.
+
+### Pontos críticos aprendidos
+- **Projetos completos antes da execução** é a lição mais repetida da Casa M&A: luminotécnico, ar-condicionado, instalações e travessias de baldrame geraram retrabalho por chegarem depois da obra começar. Antecipar e compatibilizar os complementares é sua maior alavanca contra retrabalho.
+- **Água é onde o erro custa caro**: o empoçamento da área técnica na Casa RL e o contrapiso fino sobre o plywood na M&A apontam a mesma regra — conferir caimento e nível antes de avançar, e projetar rebaixo de 10 cm nas áreas molhadas de steel frame.
+- **Estrutura sob carga não espera**: paredes saíram do prumo quando as 12 t de telha cerâmica entraram. Escorar o térreo antes de carregar a cobertura, sempre.
+- **Especificação por escrito no pedido de compra**: a placa cimentícia de 8 mm no lugar de 10 mm mostrou que "entendido" não é "especificado".
+- **Cliente exigente é treino**: dominar cada detalhe da obra para responder com propriedade virou seu padrão de comunicação desde a Casa RL.
+
+### Obra
+- **Casa M&A** (steel frame, 506,25 m²) em andamento e ativa no app. A Casa RL, concluída, deixou as bases: a flexibilidade da alvenaria, o custo da equipe na diária para o cronograma e o valor de uma equipe experiente ao lado.
+
+### Para a próxima semana
+- Começar os **RDOs diários** da Casa M&A no app — clima, efetivo e % de avanço dos serviços: é isso que alimenta as próximas retrospectivas.
+- **Gestão de prazo** apareceu como ponto a desenvolver na RL e ainda não tem nenhum registro na M&A — vale anotar as decisões de cronograma da semana.
+
+---
