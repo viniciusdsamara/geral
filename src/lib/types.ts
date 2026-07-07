@@ -1,3 +1,11 @@
+export interface Perfil {
+  user_id: string
+  email: string
+  aprovado: boolean
+  admin: boolean
+  criado_em: string
+}
+
 export interface Obra {
   id: string
   nome: string

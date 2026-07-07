@@ -8,6 +8,8 @@ interface Props {
   userId: string
   obra: Obra
   onObraMudou: () => void
+  ehAdmin: boolean
+  onAbrirAdmin: () => void
 }
 
 function progressoRdo(r: Rdo | null): { valor: number; detalhe: string } {
@@ -22,7 +24,7 @@ function progressoRdo(r: Rdo | null): { valor: number; detalhe: string } {
   return { valor: n / 4, detalhe: `${n} de 4 seções` }
 }
 
-export default function Hoje({ userId, obra, onObraMudou }: Props) {
+export default function Hoje({ userId, obra, onObraMudou, ehAdmin, onAbrirAdmin }: Props) {
   const hoje = hojeISO()
   const [rdo, setRdo] = useState<Rdo | null>(null)
   const [qtdAprendizados, setQtdAprendizados] = useState(0)
@@ -99,6 +101,17 @@ export default function Hoje({ userId, obra, onObraMudou }: Props) {
           </button>
           {menuAberto && (
             <div className="absolute right-0 z-10 mt-1 w-44 rounded-xl border border-hairline bg-surface py-1 shadow-sm">
+              {ehAdmin && (
+                <button
+                  onClick={() => {
+                    setMenuAberto(false)
+                    onAbrirAdmin()
+                  }}
+                  className="block w-full px-4 py-2.5 text-left text-sm"
+                >
+                  Administração
+                </button>
+              )}
               <button
                 onClick={() => {
                   setMenuAberto(false)

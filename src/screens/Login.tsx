@@ -20,7 +20,8 @@ export default function Login() {
     } else {
       const { data, error } = await supabase.auth.signUp({ email, password: senha })
       if (error) setErro(error.message)
-      else if (!data.session) setAviso('Conta criada! Verifique seu e-mail para confirmar.')
+      else if (!data.session)
+        setAviso('Conta criada! Confirme seu e-mail; o acesso depende da aprovação do administrador.')
     }
     setCarregando(false)
   }

@@ -33,6 +33,10 @@ npm run dev
 
 Qualquer host estático serve (o backend é o Supabase). O caminho mais simples: importar este repositório na [Vercel](https://vercel.com/new) ou [Netlify](https://app.netlify.com/start) — build `npm run build`, pasta de saída `dist`. Depois é só abrir a URL no celular e "Adicionar à tela inicial".
 
+## Controle de acesso
+
+O app é fechado por aprovação. A conta `viniciusdsamara@gmail.com` nasce como **administrador aprovado** (via trigger no banco). Qualquer outra conta criada fica **pendente**: a pessoa consegue fazer login, mas vê apenas a tela "Aguardando aprovação" — e as policies de RLS (restritivas, em todas as tabelas e no Storage) bloqueiam qualquer leitura ou escrita de dados até o admin liberar. O painel **Administração** (menu ⋯ da tela Hoje, visível só para admin) lista as contas e permite aprovar/revogar.
+
 ## Primeiro acesso
 
 1. Abra o app e crie sua conta (e-mail e senha).
