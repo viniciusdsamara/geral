@@ -63,7 +63,7 @@ export interface Retrospectiva {
   semana_inicio: string
   semana_fim: string
   conteudo_md: string
-  tipo: 'evolucao' | 'resumo'
+  tipo: 'evolucao' | 'resumo' | 'fechamento'
   created_at: string
 }
 

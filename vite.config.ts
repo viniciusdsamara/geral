@@ -9,6 +9,34 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
+      workbox: {
+        runtimeCaching: [
+          {
+            // Leituras de dados: rede primeiro, cache como reserva offline
+            urlPattern: ({ url, request }) =>
+              url.hostname.endsWith('.supabase.co') &&
+              url.pathname.startsWith('/rest/v1/') &&
+              request.method === 'GET',
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'dados',
+              networkTimeoutSeconds: 5,
+              expiration: { maxEntries: 300, maxAgeSeconds: 60 * 60 * 24 * 14 },
+            },
+          },
+          {
+            // Fotos assinadas: cache primeiro (o conteúdo do path nunca muda)
+            urlPattern: ({ url }) =>
+              url.hostname.endsWith('.supabase.co') &&
+              url.pathname.includes('/storage/v1/object/sign/'),
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'fotos',
+              expiration: { maxEntries: 300, maxAgeSeconds: 60 * 60 * 24 * 7 },
+            },
+          },
+        ],
+      },
       manifest: {
         name: 'RDO Diário',
         short_name: 'RDO',

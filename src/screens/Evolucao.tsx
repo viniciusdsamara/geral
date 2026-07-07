@@ -120,10 +120,16 @@ export default function Evolucao({ userId }: { userId: string }) {
         <article key={r.id} className="rounded-2xl border border-hairline bg-surface p-4">
           <div className="mb-2 flex items-center justify-between">
             <h2 className="text-sm font-semibold text-accent">
-              Semana de {ddmm(r.semana_inicio)} a {ddmm(r.semana_fim)}
+              {r.tipo === 'fechamento'
+                ? `Obra encerrada · ${ddmm(r.semana_inicio)} a ${ddmm(r.semana_fim)}`
+                : `Semana de ${ddmm(r.semana_inicio)} a ${ddmm(r.semana_fim)}`}
             </h2>
             <span className="rounded-full border border-hairline px-2.5 py-0.5 text-[11px] font-medium text-ink2">
-              {r.tipo === 'resumo' ? 'Resumo da obra' : 'Evolução'}
+              {r.tipo === 'resumo'
+                ? 'Resumo da obra'
+                : r.tipo === 'fechamento'
+                  ? 'Fechamento'
+                  : 'Evolução'}
             </span>
           </div>
           <Markdown md={r.conteudo_md} />

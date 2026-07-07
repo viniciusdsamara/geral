@@ -19,6 +19,18 @@ export default function App() {
   const [aba, setAba] = useState<Aba>('hoje')
   const [adminAberto, setAdminAberto] = useState(false)
   const [erroConexao, setErroConexao] = useState(false)
+  const [online, setOnline] = useState(navigator.onLine)
+
+  useEffect(() => {
+    const ligar = () => setOnline(true)
+    const desligar = () => setOnline(false)
+    window.addEventListener('online', ligar)
+    window.addEventListener('offline', desligar)
+    return () => {
+      window.removeEventListener('online', ligar)
+      window.removeEventListener('offline', desligar)
+    }
+  }, [])
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => setSession(data.session))
@@ -137,6 +149,11 @@ export default function App() {
 
   return (
     <div className="mx-auto min-h-dvh max-w-lg px-4 pb-24 pt-6">
+      {!online && (
+        <p className="mb-4 rounded-xl border border-hairline bg-surface px-3 py-2 text-center text-xs font-medium text-muted">
+          Você está offline — mostrando dados salvos; o que você escrever fica guardado no aparelho
+        </p>
+      )}
       {aba === 'hoje' && (
         <Hoje
           userId={userId}

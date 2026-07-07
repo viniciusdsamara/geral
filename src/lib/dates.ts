@@ -19,6 +19,14 @@ export function fmtDataLonga(iso: string): string {
   return s.charAt(0).toUpperCase() + s.slice(1)
 }
 
+export function diffDias(deISO: string, ateISO: string): number {
+  const [y1, m1, d1] = deISO.split('-').map(Number)
+  const [y2, m2, d2] = ateISO.split('-').map(Number)
+  return Math.round(
+    (new Date(y2, m2 - 1, d2).getTime() - new Date(y1, m1 - 1, d1).getTime()) / 86400000,
+  )
+}
+
 export function fmtDataCurta(iso: string): string {
   const [y, m, d] = iso.split('-').map(Number)
   return new Date(y, m - 1, d).toLocaleDateString('pt-BR', {
