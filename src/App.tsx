@@ -26,7 +26,19 @@ export default function App() {
   }, [])
 
   const carregarPerfil = useCallback(async () => {
-    const { data } = await supabase.from('perfis').select('*').maybeSingle()
+    // Filtra pelo próprio id: admin enxerga todos os perfis via RLS,
+    // e sem o filtro a consulta retornaria mais de uma linha.
+    const { data: s } = await supabase.auth.getSession()
+    const uid = s.session?.user.id
+    if (!uid) {
+      setPerfil(null)
+      return
+    }
+    const { data } = await supabase
+      .from('perfis')
+      .select('*')
+      .eq('user_id', uid)
+      .maybeSingle()
     setPerfil((data as Perfil | null) ?? null)
   }, [])
 
