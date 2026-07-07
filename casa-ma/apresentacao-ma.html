@@ -50,13 +50,37 @@
   .info .k{display:block;text-transform:uppercase;letter-spacing:.09em;font-size:.66rem;color:var(--gold);font-weight:700;margin-bottom:3px}
   .info .v{font-size:.98rem;color:#dde2e8}
 
-  /* SUMÁRIO */
-  .toc{margin-top:20px;max-width:760px}
-  .toc .row{display:flex;align-items:baseline;gap:16px;padding:10px 0;border-bottom:1px solid var(--line)}
-  .toc .tn{color:var(--gold);font-weight:700;font-size:.92rem;width:42px;flex:none}
-  .toc .tt{font-size:1rem;color:#dde2e8}
-  .toc .now{margin-left:auto;font-size:.64rem;text-transform:uppercase;letter-spacing:.07em;color:var(--teal);border:1px solid rgba(111,155,176,.4);padding:2px 9px;border-radius:999px;align-self:center}
-  .toc .case{margin-left:auto;font-size:.64rem;text-transform:uppercase;letter-spacing:.07em;color:var(--gold);border:1px solid rgba(200,160,106,.4);padding:2px 9px;border-radius:999px;align-self:center}
+  /* SUMÁRIO — linha do tempo horizontal */
+  .htl{margin-top:8vh;position:relative}
+  .htl .track{display:grid;grid-template-columns:repeat(9,1fr);position:relative}
+  .htl .track::before{content:"";position:absolute;left:2%;right:2%;top:50%;height:2px;
+    background:linear-gradient(to right,var(--gold) 0 83%,rgba(255,255,255,.14) 83%);transform:translateY(-50%)}
+  .htl .node{position:relative;height:230px}
+  .htl .dot{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;
+    background:var(--gold);border:3px solid var(--bg);box-shadow:0 0 0 2px var(--gold);z-index:2}
+  .htl .node.todo .dot{background:var(--bg);box-shadow:0 0 0 2px rgba(255,255,255,.25)}
+  .htl .node.now .dot{background:var(--teal);box-shadow:0 0 0 2px var(--teal),0 0 0 7px rgba(111,155,176,.18)}
+  .htl .stem{position:absolute;left:50%;width:1.5px;background:rgba(255,255,255,.16);height:26px}
+  .htl .lab{position:absolute;left:50%;transform:translateX(-50%);width:120px;text-align:center}
+  .htl .node.up .stem{bottom:calc(50% + 8px)}
+  .htl .node.up .lab{bottom:calc(50% + 40px)}
+  .htl .node.dn .stem{top:calc(50% + 8px)}
+  .htl .node.dn .lab{top:calc(50% + 40px)}
+  .htl .ln{display:block;font-size:.68rem;font-weight:700;color:var(--gold);letter-spacing:.06em;margin-bottom:2px}
+  .htl .node.todo .ln{color:#7d8894}
+  .htl .node.now .ln{color:var(--teal)}
+  .htl .lt{font-size:.8rem;color:#dde2e8;line-height:1.35}
+  .htl .node.todo .lt{color:#8a93a0}
+  .htl .badge{display:inline-block;margin-top:5px;font-size:.6rem;text-transform:uppercase;letter-spacing:.07em;
+    padding:2px 8px;border-radius:999px}
+  .htl .badge.b-now{color:var(--teal);border:1px solid rgba(111,155,176,.4)}
+  .htl .badge.b-case{color:var(--gold);border:1px solid rgba(200,160,106,.4)}
+  .htl-legend{display:flex;gap:22px;margin-top:6vh;font-size:.78rem;color:#c9d1db}
+  .htl-legend div{display:flex;align-items:center;gap:8px}
+  .htl-legend .k{width:11px;height:11px;border-radius:50%;flex:none}
+  @media(max-width:860px){.htl .track{grid-template-columns:1fr;gap:0}.htl .track::before{display:none}
+    .htl .node{height:auto;padding:10px 0 10px 30px}.htl .dot{left:8px;top:18px;transform:none}
+    .htl .stem{display:none}.htl .lab{position:static;transform:none;width:auto;text-align:left}}
 
   /* PHASE LAYOUTS */
   .phase-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:34px;align-items:start;margin-top:22px}
@@ -174,21 +198,36 @@
   </ul>
 </section>
 
-<!-- 3 · SUMÁRIO -->
+<!-- 3 · SUMÁRIO — LINHA DO TEMPO HORIZONTAL -->
 <section class="slide">
   <div class="kick">Sumário</div>
   <h2>Linha do tempo da obra</h2>
-  <div class="toc">
-    <div class="row"><span class="tn">2.1</span><span class="tt">Terreno e fundação</span></div>
-    <div class="row"><span class="tn">2.2</span><span class="tt">Estrutura steel frame</span></div>
-    <div class="row"><span class="tn">2.3</span><span class="tt">Entrepiso / laje</span></div>
-    <div class="row"><span class="tn">2.4</span><span class="tt">Cobertura</span></div>
-    <div class="row"><span class="tn">2.5</span><span class="tt">Fechamentos e fachada</span></div>
-    <div class="row"><span class="tn">2.6</span><span class="tt">Instalações</span></div>
-    <div class="row"><span class="tn">2.7</span><span class="tt">Impermeabilização dos banheiros</span><span class="case">case</span></div>
-    <div class="row"><span class="tn">2.8</span><span class="tt">Acabamentos internos</span><span class="now">ponto atual</span></div>
-    <div class="row"><span class="tn">2.10</span><span class="tt">Área externa</span></div>
-    <div class="row"><span class="tn">—</span><span class="tt">Síntese</span></div>
+  <div class="htl">
+    <div class="track">
+      <div class="node up"><span class="dot"></span><span class="stem"></span>
+        <span class="lab"><span class="ln">2.1</span><span class="lt">Terreno e fundação</span></span></div>
+      <div class="node dn"><span class="dot"></span><span class="stem"></span>
+        <span class="lab"><span class="ln">2.2</span><span class="lt">Estrutura steel frame</span></span></div>
+      <div class="node up"><span class="dot"></span><span class="stem"></span>
+        <span class="lab"><span class="ln">2.3</span><span class="lt">Entrepiso / laje</span></span></div>
+      <div class="node dn"><span class="dot"></span><span class="stem"></span>
+        <span class="lab"><span class="ln">2.4</span><span class="lt">Cobertura</span></span></div>
+      <div class="node up"><span class="dot"></span><span class="stem"></span>
+        <span class="lab"><span class="ln">2.5</span><span class="lt">Fechamentos e fachada</span></span></div>
+      <div class="node dn"><span class="dot"></span><span class="stem"></span>
+        <span class="lab"><span class="ln">2.6</span><span class="lt">Instalações</span></span></div>
+      <div class="node up"><span class="dot"></span><span class="stem"></span>
+        <span class="lab"><span class="ln">2.7</span><span class="lt">Impermeabilização</span><span class="badge b-case">case</span></span></div>
+      <div class="node dn now"><span class="dot"></span><span class="stem"></span>
+        <span class="lab"><span class="ln">2.8</span><span class="lt">Acabamentos internos</span><span class="badge b-now">ponto atual</span></span></div>
+      <div class="node up todo"><span class="dot"></span><span class="stem"></span>
+        <span class="lab"><span class="ln">2.10</span><span class="lt">Área externa</span></span></div>
+    </div>
+    <div class="htl-legend">
+      <div><span class="k" style="background:var(--gold)"></span> Concluída</div>
+      <div><span class="k" style="background:var(--teal)"></span> Em andamento</div>
+      <div><span class="k" style="background:transparent;border:2px solid rgba(255,255,255,.3)"></span> A iniciar</div>
+    </div>
   </div>
 </section>
 
