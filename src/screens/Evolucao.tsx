@@ -8,23 +8,56 @@ function ddmm(iso: string): string {
   return `${d}/${m}`
 }
 
+interface MesClima {
+  mes: string
+  impraticaveis: number
+  rdos: number
+}
+
+const MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
+
 export default function Evolucao({ userId }: { userId: string }) {
   const [retros, setRetros] = useState<Retrospectiva[] | null>(null)
+  const [clima, setClima] = useState<MesClima[]>([])
   const [erroRede, setErroRede] = useState(false)
 
   const carregar = useCallback(async () => {
-    const { data, error } = await supabase
-      .from('retrospectivas')
-      .select('*')
-      .eq('user_id', userId)
-      .order('semana_inicio', { ascending: false })
-      .order('tipo', { ascending: true })
-    if (error) {
+    const desde = new Date()
+    desde.setDate(desde.getDate() - 90)
+    const desdeISO = desde.toISOString().slice(0, 10)
+    const [r, c] = await Promise.all([
+      supabase
+        .from('retrospectivas')
+        .select('*')
+        .eq('user_id', userId)
+        .order('semana_inicio', { ascending: false })
+        .order('tipo', { ascending: true }),
+      supabase
+        .from('rdos')
+        .select('data, praticavel_manha, praticavel_tarde')
+        .eq('user_id', userId)
+        .gte('data', desdeISO),
+    ])
+    if (r.error || c.error) {
       setErroRede(true)
       return
     }
     setErroRede(false)
-    setRetros((data as Retrospectiva[]) ?? [])
+    setRetros((r.data as Retrospectiva[]) ?? [])
+
+    const porMes = new Map<string, { impraticaveis: number; rdos: number }>()
+    for (const rdo of c.data ?? []) {
+      const chave = rdo.data.slice(0, 7)
+      const m = porMes.get(chave) ?? { impraticaveis: 0, rdos: 0 }
+      m.rdos++
+      if (!rdo.praticavel_manha || !rdo.praticavel_tarde) m.impraticaveis++
+      porMes.set(chave, m)
+    }
+    setClima(
+      [...porMes.entries()]
+        .sort((a, b) => (a[0] < b[0] ? 1 : -1))
+        .map(([mes, v]) => ({ mes, ...v })),
+    )
   }, [userId])
 
   useEffect(() => {
@@ -50,6 +83,27 @@ export default function Evolucao({ userId }: { userId: string }) {
       )}
 
       {retros === null && !erroRede && <p className="text-sm text-muted">Carregando…</p>}
+
+      {clima.length > 0 && (
+        <section className="rounded-2xl border border-hairline bg-surface p-4">
+          <h2 className="mb-2 text-sm font-semibold">Dias impraticáveis</h2>
+          <ul className="space-y-1">
+            {clima.map((m) => (
+              <li key={m.mes} className="flex items-baseline justify-between text-sm">
+                <span className="text-ink2">
+                  {MESES[Number(m.mes.slice(5, 7)) - 1]}/{m.mes.slice(0, 4)}
+                </span>
+                <span className={m.impraticaveis > 0 ? 'font-medium text-danger' : 'text-muted'}>
+                  {m.impraticaveis === 0
+                    ? 'nenhum'
+                    : `${m.impraticaveis} dia${m.impraticaveis > 1 ? 's' : ''}`}
+                  <span className="text-muted"> · {m.rdos} RDO{m.rdos > 1 ? 's' : ''}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {retros !== null && retros.length === 0 && (
         <div className="rounded-2xl border border-hairline bg-surface p-5 text-center">

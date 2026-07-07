@@ -296,10 +296,22 @@ export default function Rdo({ userId, obra }: Props) {
   }
 
   const hoje = hojeISO()
+  const [dataRetro, setDataRetro] = useState<string | null>(null)
 
   function abrir(dia: string) {
     setData(dia)
+    setDataRetro(null)
     setModo('form')
+  }
+
+  // Último RDO anterior à data aberta: base do "repetir equipe e serviços"
+  const anterior = lista.find((r) => r.data < data)
+
+  function repetirAnterior() {
+    if (!anterior) return
+    setEfetivo(anterior.efetivo)
+    setServicos(anterior.servicos)
+    setSujo(true)
   }
 
   async function voltarParaLista() {
@@ -383,6 +395,32 @@ export default function Rdo({ userId, obra }: Props) {
             )
           })}
         </div>
+
+        {dataRetro === null ? (
+          <button
+            onClick={() => setDataRetro('')}
+            className="w-full py-1 text-center text-sm font-medium text-accent"
+          >
+            Lançar RDO de outra data
+          </button>
+        ) : (
+          <div className="flex gap-2">
+            <input
+              type="date"
+              max={hoje}
+              value={dataRetro}
+              onChange={(e) => setDataRetro(e.target.value)}
+              className="flex-1 rounded-xl border border-hairline bg-surface px-3 py-2.5 text-sm outline-none focus:border-accent"
+            />
+            <button
+              onClick={() => dataRetro && abrir(dataRetro)}
+              disabled={!dataRetro}
+              className="rounded-xl bg-accent px-4 text-sm font-semibold text-white disabled:opacity-40"
+            >
+              Abrir
+            </button>
+          </div>
+        )}
       </div>
     )
   }
@@ -417,6 +455,15 @@ export default function Rdo({ userId, obra }: Props) {
           className="w-full rounded-xl border border-danger/40 bg-danger/10 px-3 py-2.5 text-sm font-medium text-danger"
         >
           Sem conexão — o RDO está guardado no aparelho. Toque para reenviar.
+        </button>
+      )}
+
+      {!rdoId && efetivo.length === 0 && servicos.length === 0 && anterior && (
+        <button
+          onClick={repetirAnterior}
+          className="w-full rounded-xl border border-hairline bg-surface px-3 py-2.5 text-sm font-medium text-accent"
+        >
+          Repetir efetivo e serviços de {anterior.data === hoje ? 'hoje' : fmtDataCurta(anterior.data)}
         </button>
       )}
 

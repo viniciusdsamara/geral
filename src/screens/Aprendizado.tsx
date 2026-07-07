@@ -19,6 +19,8 @@ export default function Aprendizado({ userId }: Props) {
   const [salvando, setSalvando] = useState(false)
   const [erro, setErro] = useState('')
   const [erroRede, setErroRede] = useState(false)
+  const [busca, setBusca] = useState('')
+  const [resultados, setResultados] = useState<AprendizadoTipo[] | null>(null)
 
   const carregar = useCallback(async () => {
     const desde = new Date()
@@ -45,6 +47,26 @@ export default function Aprendizado({ userId }: Props) {
   useEffect(() => {
     carregar()
   }, [carregar])
+
+  // Busca no histórico inteiro (sem o corte de 30 dias)
+  useEffect(() => {
+    const q = busca.trim()
+    if (!q) {
+      setResultados(null)
+      return
+    }
+    const timer = setTimeout(async () => {
+      const { data, error } = await supabase
+        .from('aprendizados')
+        .select('*')
+        .eq('user_id', userId)
+        .ilike('texto', `%${q}%`)
+        .order('created_at', { ascending: false })
+        .limit(100)
+      if (!error) setResultados((data as AprendizadoTipo[]) ?? [])
+    }, 300)
+    return () => clearTimeout(timer)
+  }, [busca, userId])
 
   async function salvarRegistro(e: React.FormEvent) {
     e.preventDefault()
@@ -99,8 +121,10 @@ export default function Aprendizado({ userId }: Props) {
   }
   const fatias: Fatia[] = [...contagem.entries()].map(([nome, qtd]) => ({ nome, qtd }))
 
+  const buscando = resultados !== null
+  const exibidos = resultados ?? registros
   const porDia = new Map<string, AprendizadoTipo[]>()
-  for (const r of registros) {
+  for (const r of exibidos) {
     const lista = porDia.get(r.data) ?? []
     lista.push(r)
     porDia.set(r.data, lista)
@@ -109,6 +133,21 @@ export default function Aprendizado({ userId }: Props) {
   return (
     <div className="space-y-4">
       <h1 className="text-xl font-semibold">Aprendizado</h1>
+
+      <input
+        value={busca}
+        onChange={(e) => setBusca(e.target.value)}
+        placeholder="Buscar em tudo que você já aprendeu…"
+        className="w-full rounded-xl border border-hairline bg-surface px-3 py-2.5 text-sm outline-none focus:border-accent"
+      />
+
+      {buscando && (
+        <p className="text-sm text-muted">
+          {exibidos.length === 0
+            ? 'Nada encontrado.'
+            : `${exibidos.length} resultado${exibidos.length > 1 ? 's' : ''} no histórico completo`}
+        </p>
+      )}
 
       {erroRede && (
         <button
@@ -119,7 +158,10 @@ export default function Aprendizado({ userId }: Props) {
         </button>
       )}
 
-      <form onSubmit={salvarRegistro} className="rounded-2xl border border-hairline bg-surface p-4">
+      <form
+        onSubmit={salvarRegistro}
+        className={`rounded-2xl border border-hairline bg-surface p-4 ${buscando ? 'hidden' : ''}`}
+      >
         <textarea
           value={texto}
           onChange={(e) => setTexto(e.target.value)}
@@ -179,7 +221,7 @@ export default function Aprendizado({ userId }: Props) {
         </button>
       </form>
 
-      {fatias.length > 0 && (
+      {!buscando && fatias.length > 0 && (
         <section className="rounded-2xl border border-hairline bg-surface p-4">
           <h2 className="mb-1 text-sm font-semibold">Onde você está aprendendo</h2>
           <p className="mb-4 text-xs text-muted">últimos {DIAS_GRAFICO} dias</p>

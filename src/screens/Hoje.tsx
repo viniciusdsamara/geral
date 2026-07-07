@@ -36,6 +36,13 @@ export default function Hoje({ userId, obra, onObraMudou, ehAdmin, onAbrirAdmin 
   const [erroRede, setErroRede] = useState(false)
 
   const carregar = useCallback(async () => {
+    // Tarefas não concluídas de dias anteriores rolam para hoje
+    await supabase
+      .from('tarefas')
+      .update({ data: hoje })
+      .eq('user_id', userId)
+      .eq('concluida', false)
+      .lt('data', hoje)
     const [r, a, t] = await Promise.all([
       supabase
         .from('rdos')
