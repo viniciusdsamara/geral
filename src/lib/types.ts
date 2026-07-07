@@ -35,6 +35,7 @@ export interface Rdo {
   equipamentos: string | null
   ocorrencias: string | null
   relato: string | null
+  updated_at: string
 }
 
 export interface RdoFoto {

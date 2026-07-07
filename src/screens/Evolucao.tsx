@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import type { Retrospectiva } from '../lib/types'
 import Markdown from '../components/Markdown'
@@ -8,17 +8,28 @@ function ddmm(iso: string): string {
   return `${d}/${m}`
 }
 
-export default function Evolucao() {
+export default function Evolucao({ userId }: { userId: string }) {
   const [retros, setRetros] = useState<Retrospectiva[] | null>(null)
+  const [erroRede, setErroRede] = useState(false)
 
-  useEffect(() => {
-    supabase
+  const carregar = useCallback(async () => {
+    const { data, error } = await supabase
       .from('retrospectivas')
       .select('*')
+      .eq('user_id', userId)
       .order('semana_inicio', { ascending: false })
       .order('tipo', { ascending: true })
-      .then(({ data }) => setRetros((data as Retrospectiva[]) ?? []))
-  }, [])
+    if (error) {
+      setErroRede(true)
+      return
+    }
+    setErroRede(false)
+    setRetros((data as Retrospectiva[]) ?? [])
+  }, [userId])
+
+  useEffect(() => {
+    carregar()
+  }, [carregar])
 
   return (
     <div className="space-y-4">
@@ -29,7 +40,16 @@ export default function Evolucao() {
         </p>
       </header>
 
-      {retros === null && <p className="text-sm text-muted">Carregando…</p>}
+      {erroRede && (
+        <button
+          onClick={carregar}
+          className="w-full rounded-xl border border-danger/40 bg-danger/10 px-3 py-2.5 text-sm font-medium text-danger"
+        >
+          Sem conexão — toque para tentar de novo
+        </button>
+      )}
+
+      {retros === null && !erroRede && <p className="text-sm text-muted">Carregando…</p>}
 
       {retros !== null && retros.length === 0 && (
         <div className="rounded-2xl border border-hairline bg-surface p-5 text-center">

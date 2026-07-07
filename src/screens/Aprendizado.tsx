@@ -17,22 +17,30 @@ export default function Aprendizado({ userId }: Props) {
   const [novoAssunto, setNovoAssunto] = useState<string | null>(null)
   const [registros, setRegistros] = useState<AprendizadoTipo[]>([])
   const [salvando, setSalvando] = useState(false)
+  const [erro, setErro] = useState('')
+  const [erroRede, setErroRede] = useState(false)
 
   const carregar = useCallback(async () => {
     const desde = new Date()
     desde.setDate(desde.getDate() - DIAS_GRAFICO)
     const desdeISO = desde.toISOString().slice(0, 10)
     const [a, r] = await Promise.all([
-      supabase.from('assuntos').select('id, nome').order('nome'),
+      supabase.from('assuntos').select('id, nome').eq('user_id', userId).order('nome'),
       supabase
         .from('aprendizados')
         .select('*')
+        .eq('user_id', userId)
         .gte('data', desdeISO)
         .order('created_at', { ascending: false }),
     ])
+    if (a.error || r.error) {
+      setErroRede(true)
+      return
+    }
+    setErroRede(false)
     setAssuntos((a.data as Assunto[]) ?? [])
     setRegistros((r.data as AprendizadoTipo[]) ?? [])
-  }, [])
+  }, [userId])
 
   useEffect(() => {
     carregar()
@@ -43,30 +51,42 @@ export default function Aprendizado({ userId }: Props) {
     const t = texto.trim()
     if (!t) return
     setSalvando(true)
+    setErro('')
     let assuntoId = assuntoSel
     if (novoAssunto !== null && novoAssunto.trim()) {
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from('assuntos')
         .insert({ nome: novoAssunto.trim(), user_id: userId })
         .select('id')
         .single()
+      if (error) {
+        setErro('Não foi possível salvar — verifique a conexão. Seu texto continua aqui.')
+        setSalvando(false)
+        return
+      }
       assuntoId = data?.id ?? null
     }
-    await supabase.from('aprendizados').insert({
+    const { error } = await supabase.from('aprendizados').insert({
       texto: t,
       assunto_id: assuntoId,
       data: hojeISO(),
       user_id: userId,
     })
+    setSalvando(false)
+    if (error) {
+      // o texto fica no campo: nada se perde
+      setErro('Não foi possível salvar — verifique a conexão. Seu texto continua aqui.')
+      return
+    }
     setTexto('')
     setNovoAssunto(null)
-    setSalvando(false)
     carregar()
   }
 
   async function remover(id: string) {
     setRegistros((rs) => rs.filter((r) => r.id !== id))
-    await supabase.from('aprendizados').delete().eq('id', id)
+    const { error } = await supabase.from('aprendizados').delete().eq('id', id)
+    if (error) carregar()
   }
 
   const nomeAssunto = (id: string | null) =>
@@ -89,6 +109,15 @@ export default function Aprendizado({ userId }: Props) {
   return (
     <div className="space-y-4">
       <h1 className="text-xl font-semibold">Aprendizado</h1>
+
+      {erroRede && (
+        <button
+          onClick={carregar}
+          className="w-full rounded-xl border border-danger/40 bg-danger/10 px-3 py-2.5 text-sm font-medium text-danger"
+        >
+          Sem conexão — toque para tentar de novo
+        </button>
+      )}
 
       <form onSubmit={salvarRegistro} className="rounded-2xl border border-hairline bg-surface p-4">
         <textarea
@@ -140,12 +169,13 @@ export default function Aprendizado({ userId }: Props) {
             />
           )}
         </div>
+        {erro && <p className="mt-2 text-xs font-medium text-danger">{erro}</p>}
         <button
           type="submit"
           disabled={salvando || !texto.trim()}
           className="mt-3 w-full rounded-xl bg-accent py-2.5 text-sm font-semibold text-white disabled:opacity-40"
         >
-          Registrar
+          {salvando ? 'Salvando…' : 'Registrar'}
         </button>
       </form>
 

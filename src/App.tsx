@@ -18,6 +18,7 @@ export default function App() {
   const [obra, setObra] = useState<Obra | null | undefined>(undefined)
   const [aba, setAba] = useState<Aba>('hoje')
   const [adminAberto, setAdminAberto] = useState(false)
+  const [erroConexao, setErroConexao] = useState(false)
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => setSession(data.session))
@@ -34,21 +35,39 @@ export default function App() {
       setPerfil(null)
       return
     }
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from('perfis')
       .select('*')
       .eq('user_id', uid)
       .maybeSingle()
+    if (error) {
+      // Sem rede não dá para saber o status: melhor avisar do que
+      // mostrar "aguardando aprovação" para quem já é aprovado.
+      setErroConexao(true)
+      return
+    }
     setPerfil((data as Perfil | null) ?? null)
   }, [])
 
   const carregarObra = useCallback(async () => {
-    const { data } = await supabase
+    const { data: s } = await supabase.auth.getSession()
+    const uid = s.session?.user.id
+    if (!uid) {
+      setObra(null)
+      return
+    }
+    const { data, error } = await supabase
       .from('obras')
       .select('id, nome, ativa')
+      .eq('user_id', uid)
       .eq('ativa', true)
       .order('created_at', { ascending: false })
       .limit(1)
+    if (error) {
+      // Sem rede, não mostrar o cadastro de obra (criaria duplicada)
+      setErroConexao(true)
+      return
+    }
     setObra(data && data.length > 0 ? data[0] : null)
   }, [])
 
@@ -66,6 +85,31 @@ export default function App() {
   }
 
   if (!session) return <Login />
+
+  if (erroConexao) {
+    return (
+      <div className="flex min-h-dvh items-center justify-center px-6">
+        <div className="w-full max-w-sm text-center">
+          <h1 className="mb-1 text-xl font-semibold">Sem conexão</h1>
+          <p className="mb-6 text-sm text-ink2">
+            Não foi possível falar com o servidor. Verifique o sinal e tente de novo.
+          </p>
+          <button
+            onClick={() => {
+              setErroConexao(false)
+              setPerfil(undefined)
+              setObra(undefined)
+              carregarPerfil()
+              carregarObra()
+            }}
+            className="w-full rounded-xl bg-accent py-3 text-sm font-semibold text-white"
+          >
+            Tentar de novo
+          </button>
+        </div>
+      </div>
+    )
+  }
 
   if (perfil === undefined || obra === undefined) {
     return <div className="flex min-h-dvh items-center justify-center text-muted">Carregando…</div>
@@ -104,7 +148,7 @@ export default function App() {
       )}
       {aba === 'rdo' && <Rdo userId={userId} obra={obra} />}
       {aba === 'aprendizado' && <Aprendizado userId={userId} />}
-      {aba === 'evolucao' && <Evolucao />}
+      {aba === 'evolucao' && <Evolucao userId={userId} />}
       <TabBar aba={aba} onMudar={setAba} />
     </div>
   )

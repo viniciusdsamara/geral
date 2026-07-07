@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { fmtDataCurta, hojeISO } from '../lib/dates'
+import { comprimirImagem } from '../lib/imagem'
 import type { EfetivoItem, Obra, Rdo as RdoTipo, RdoFoto, ServicoItem } from '../lib/types'
 
 interface Props {
@@ -13,6 +14,23 @@ const CLIMAS = ['Ensolarado', 'Nublado', 'Chuvoso'] as const
 interface FotoComUrl extends RdoFoto {
   url: string
 }
+
+// Rascunho local: cada alteração fica no aparelho até o banco confirmar,
+// então nada se perde sem sinal ou com o app fechado no meio.
+interface Rascunho {
+  climaManha: string | null
+  climaTarde: string | null
+  praticavelManha: boolean
+  praticavelTarde: boolean
+  efetivo: EfetivoItem[]
+  servicos: ServicoItem[]
+  equipamentos: string
+  ocorrencias: string
+  relato: string
+  ts: number
+}
+
+const chaveRascunho = (obraId: string, data: string) => `rdo-rascunho-${obraId}-${data}`
 
 export default function Rdo({ userId, obra }: Props) {
   const [modo, setModo] = useState<'lista' | 'form'>('lista')
@@ -31,85 +49,115 @@ export default function Rdo({ userId, obra }: Props) {
   const [fotos, setFotos] = useState<FotoComUrl[]>([])
   const [sujo, setSujo] = useState(false)
   const [salvando, setSalvando] = useState(false)
+  const [erroSalvar, setErroSalvar] = useState(false)
+  const [erroCarregar, setErroCarregar] = useState(false)
   const [enviandoFoto, setEnviandoFoto] = useState(false)
+  const [erroFoto, setErroFoto] = useState('')
   const cameraRef = useRef<HTMLInputElement>(null)
   const galeriaRef = useRef<HTMLInputElement>(null)
 
   const carregarFotos = useCallback(async (id: string) => {
-    const { data: rows } = await supabase
+    const { data: rows, error } = await supabase
       .from('rdo_fotos')
       .select('*')
+      .eq('user_id', userId)
       .eq('rdo_id', id)
       .order('created_at')
-    const lista = (rows as RdoFoto[]) ?? []
-    if (lista.length === 0) {
+    if (error) return
+    const listaFotos = (rows as RdoFoto[]) ?? []
+    if (listaFotos.length === 0) {
       setFotos([])
       return
     }
     const { data: assinadas } = await supabase.storage
       .from('rdo-fotos')
-      .createSignedUrls(lista.map((f) => f.path), 3600)
-    setFotos(
-      lista.map((f, i) => ({ ...f, url: assinadas?.[i]?.signedUrl ?? '' })),
-    )
-  }, [])
+      .createSignedUrls(listaFotos.map((f) => f.path), 60 * 60 * 24)
+    const porPath = new Map(assinadas?.map((a) => [a.path, a.signedUrl]) ?? [])
+    setFotos(listaFotos.map((f) => ({ ...f, url: porPath.get(f.path) ?? '' })))
+  }, [userId])
 
   const carregar = useCallback(async () => {
-    const { data: r } = await supabase
+    const { data: r, error } = await supabase
       .from('rdos')
       .select('*')
+      .eq('user_id', userId)
       .eq('obra_id', obra.id)
       .eq('data', data)
       .maybeSingle()
+    if (error) {
+      setErroCarregar(true)
+      return
+    }
+    setErroCarregar(false)
     const rdo = r as RdoTipo | null
     setRdoId(rdo?.id ?? null)
-    setClimaManha(rdo?.clima_manha ?? null)
-    setClimaTarde(rdo?.clima_tarde ?? null)
-    setPraticavelManha(rdo?.praticavel_manha ?? true)
-    setPraticavelTarde(rdo?.praticavel_tarde ?? true)
-    setEfetivo(rdo?.efetivo ?? [])
-    setServicos(rdo?.servicos ?? [])
-    setEquipamentos(rdo?.equipamentos ?? '')
-    setOcorrencias(rdo?.ocorrencias ?? '')
-    setRelato(rdo?.relato ?? '')
-    setSujo(false)
+
+    // Rascunho local mais novo que o banco vence (edições ainda não sincronizadas)
+    let aplicouRascunho = false
+    const bruto = localStorage.getItem(chaveRascunho(obra.id, data))
+    if (bruto) {
+      try {
+        const d = JSON.parse(bruto) as Rascunho
+        const remotoTs = rdo?.updated_at ? Date.parse(rdo.updated_at) : 0
+        if (d.ts > remotoTs) {
+          setClimaManha(d.climaManha)
+          setClimaTarde(d.climaTarde)
+          setPraticavelManha(d.praticavelManha)
+          setPraticavelTarde(d.praticavelTarde)
+          setEfetivo(d.efetivo)
+          setServicos(d.servicos)
+          setEquipamentos(d.equipamentos)
+          setOcorrencias(d.ocorrencias)
+          setRelato(d.relato)
+          setSujo(true)
+          aplicouRascunho = true
+        } else {
+          localStorage.removeItem(chaveRascunho(obra.id, data))
+        }
+      } catch {
+        localStorage.removeItem(chaveRascunho(obra.id, data))
+      }
+    }
+    if (!aplicouRascunho) {
+      setClimaManha(rdo?.clima_manha ?? null)
+      setClimaTarde(rdo?.clima_tarde ?? null)
+      setPraticavelManha(rdo?.praticavel_manha ?? true)
+      setPraticavelTarde(rdo?.praticavel_tarde ?? true)
+      setEfetivo(rdo?.efetivo ?? [])
+      setServicos(rdo?.servicos ?? [])
+      setEquipamentos(rdo?.equipamentos ?? '')
+      setOcorrencias(rdo?.ocorrencias ?? '')
+      setRelato(rdo?.relato ?? '')
+      setSujo(false)
+    }
+    setErroSalvar(false)
+    setErroFoto('')
     if (rdo) carregarFotos(rdo.id)
     else setFotos([])
-  }, [obra.id, data, carregarFotos])
+  }, [userId, obra.id, data, carregarFotos])
 
   useEffect(() => {
     carregar()
   }, [carregar])
 
   const carregarLista = useCallback(async () => {
-    const { data: rows } = await supabase
+    const { data: rows, error } = await supabase
       .from('rdos')
       .select('*')
+      .eq('user_id', userId)
       .eq('obra_id', obra.id)
       .order('data', { ascending: false })
+    if (error) {
+      setErroCarregar(true)
+      return
+    }
+    setErroCarregar(false)
     setLista((rows as RdoTipo[]) ?? [])
-  }, [obra.id])
+  }, [userId, obra.id])
 
   useEffect(() => {
     carregarLista()
   }, [carregarLista])
-
-  // Salvamento automático: 1s depois da última alteração
-  useEffect(() => {
-    if (!sujo) return
-    const timer = setTimeout(() => {
-      salvar()
-    }, 1000)
-    return () => clearTimeout(timer)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sujo, climaManha, climaTarde, praticavelManha, praticavelTarde, efetivo, servicos, equipamentos, ocorrencias, relato])
-
-  function marcar<T>(setter: (v: T) => void) {
-    return (v: T) => {
-      setter(v)
-      setSujo(true)
-    }
-  }
 
   async function salvar(): Promise<string | null> {
     setSalvando(true)
@@ -136,10 +184,60 @@ export default function Rdo({ userId, obra }: Props) {
       .select('id')
       .single()
     setSalvando(false)
-    if (error) return null
+    if (error) {
+      setErroSalvar(true)
+      return null
+    }
+    setErroSalvar(false)
     setRdoId(salvo.id)
     setSujo(false)
+    localStorage.removeItem(chaveRascunho(obra.id, data))
     return salvo.id
+  }
+
+  const salvarRef = useRef(salvar)
+  salvarRef.current = salvar
+  const sujoRef = useRef(sujo)
+  sujoRef.current = sujo
+
+  // Rascunho local imediato + salvamento no banco 1s depois da última alteração
+  useEffect(() => {
+    if (!sujo) return
+    localStorage.setItem(
+      chaveRascunho(obra.id, data),
+      JSON.stringify({
+        climaManha,
+        climaTarde,
+        praticavelManha,
+        praticavelTarde,
+        efetivo,
+        servicos,
+        equipamentos,
+        ocorrencias,
+        relato,
+        ts: Date.now(),
+      } satisfies Rascunho),
+    )
+    const timer = setTimeout(() => {
+      salvarRef.current()
+    }, 1000)
+    return () => clearTimeout(timer)
+  }, [sujo, obra.id, data, climaManha, climaTarde, praticavelManha, praticavelTarde, efetivo, servicos, equipamentos, ocorrencias, relato])
+
+  // Voltou o sinal: sincroniza o que estiver pendente
+  useEffect(() => {
+    const aoVoltarOnline = () => {
+      if (sujoRef.current) salvarRef.current()
+    }
+    window.addEventListener('online', aoVoltarOnline)
+    return () => window.removeEventListener('online', aoVoltarOnline)
+  }, [])
+
+  function marcar<T>(setter: (v: T) => void) {
+    return (v: T) => {
+      setter(v)
+      setSujo(true)
+    }
   }
 
   async function adicionarFotos(e: React.ChangeEvent<HTMLInputElement>) {
@@ -147,26 +245,53 @@ export default function Rdo({ userId, obra }: Props) {
     e.target.value = ''
     if (arquivos.length === 0) return
     setEnviandoFoto(true)
+    setErroFoto('')
     const id = rdoId ?? (await salvar())
     if (!id) {
       setEnviandoFoto(false)
+      setErroFoto('Sem conexão — as fotos não foram enviadas. Tente de novo.')
       return
     }
+    let falhas = 0
     for (const arquivo of arquivos) {
-      const ext = arquivo.name.split('.').pop() || 'jpg'
-      const path = `${userId}/${id}/${crypto.randomUUID()}.${ext}`
-      const { error } = await supabase.storage.from('rdo-fotos').upload(path, arquivo)
-      if (!error) {
-        await supabase.from('rdo_fotos').insert({ user_id: userId, rdo_id: id, path })
+      const blob = await comprimirImagem(arquivo)
+      let ok = false
+      for (let tentativa = 0; tentativa < 3 && !ok; tentativa++) {
+        if (tentativa > 0) await new Promise((r) => setTimeout(r, 1500 * tentativa))
+        const path = `${userId}/${id}/${crypto.randomUUID()}.jpg`
+        const { error } = await supabase.storage
+          .from('rdo-fotos')
+          .upload(path, blob, { contentType: 'image/jpeg' })
+        if (error) continue
+        const { error: erroInsert } = await supabase
+          .from('rdo_fotos')
+          .insert({ user_id: userId, rdo_id: id, path })
+        if (erroInsert) {
+          await supabase.storage.from('rdo-fotos').remove([path])
+          continue
+        }
+        ok = true
       }
+      if (!ok) falhas++
     }
     await carregarFotos(id)
     setEnviandoFoto(false)
+    if (falhas > 0) {
+      setErroFoto(
+        falhas === 1
+          ? '1 foto não subiu — verifique a conexão e tente de novo.'
+          : `${falhas} fotos não subiram — verifique a conexão e tente de novo.`,
+      )
+    }
   }
 
   async function removerFoto(f: FotoComUrl) {
     setFotos((fs) => fs.filter((x) => x.id !== f.id))
-    await supabase.from('rdo_fotos').delete().eq('id', f.id)
+    const { error } = await supabase.from('rdo_fotos').delete().eq('id', f.id)
+    if (error) {
+      if (rdoId) carregarFotos(rdoId)
+      return
+    }
     await supabase.storage.from('rdo-fotos').remove([f.path])
   }
 
@@ -191,6 +316,18 @@ export default function Rdo({ userId, obra }: Props) {
     }
   }
 
+  const bannerErroCarregar = erroCarregar && (
+    <button
+      onClick={() => {
+        carregar()
+        carregarLista()
+      }}
+      className="w-full rounded-xl border border-danger/40 bg-danger/10 px-3 py-2.5 text-sm font-medium text-danger"
+    >
+      Não foi possível carregar — toque para tentar de novo
+    </button>
+  )
+
   if (modo === 'lista') {
     const temHoje = lista.some((r) => r.data === hoje)
     return (
@@ -199,6 +336,8 @@ export default function Rdo({ userId, obra }: Props) {
           <h1 className="text-xl font-semibold">RDO</h1>
           <p className="text-sm text-ink2">{obra.nome}</p>
         </header>
+
+        {bannerErroCarregar}
 
         {!temHoje && (
           <button
@@ -209,7 +348,7 @@ export default function Rdo({ userId, obra }: Props) {
           </button>
         )}
 
-        {lista.length === 0 && (
+        {lista.length === 0 && !erroCarregar && (
           <p className="pt-2 text-center text-sm text-muted">
             Os RDOs salvos aparecem aqui, um por dia.
           </p>
@@ -265,10 +404,21 @@ export default function Rdo({ userId, obra }: Props) {
             {data === hoje ? 'RDO de hoje' : `RDO · ${fmtDataCurta(data)}`}
           </h1>
         </div>
-        <span className="text-xs text-muted">
-          {salvando || sujo ? 'salvando…' : rdoId ? 'salvo ✓' : ''}
+        <span className={`text-xs ${erroSalvar ? 'font-medium text-danger' : 'text-muted'}`}>
+          {salvando ? 'salvando…' : erroSalvar ? 'não salvo' : sujo ? '' : rdoId ? 'salvo ✓' : ''}
         </span>
       </header>
+
+      {bannerErroCarregar}
+
+      {erroSalvar && !salvando && (
+        <button
+          onClick={salvar}
+          className="w-full rounded-xl border border-danger/40 bg-danger/10 px-3 py-2.5 text-sm font-medium text-danger"
+        >
+          Sem conexão — o RDO está guardado no aparelho. Toque para reenviar.
+        </button>
+      )}
 
       <section className="rounded-2xl border border-hairline bg-surface p-4">
         <h2 className="mb-3 text-sm font-semibold">Clima</h2>
@@ -284,9 +434,7 @@ export default function Rdo({ userId, obra }: Props) {
               <button
                 onClick={() => setPraticavel(!praticavel)}
                 className={`rounded-full px-2.5 py-0.5 text-[11px] font-medium ${
-                  praticavel
-                    ? 'bg-accent/10 text-accent'
-                    : 'bg-danger/10 text-danger'
+                  praticavel ? 'bg-accent/10 text-accent' : 'bg-danger/10 text-danger'
                 }`}
               >
                 {praticavel ? 'Praticável' : 'Impraticável'}
@@ -489,6 +637,7 @@ export default function Rdo({ userId, obra }: Props) {
             <span className="text-[11px] font-medium">Galeria</span>
           </button>
         </div>
+        {erroFoto && <p className="mt-2 text-xs font-medium text-danger">{erroFoto}</p>}
         <input
           ref={cameraRef}
           type="file"

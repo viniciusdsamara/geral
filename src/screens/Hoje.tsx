@@ -33,17 +33,29 @@ export default function Hoje({ userId, obra, onObraMudou, ehAdmin, onAbrirAdmin 
   const [novaTarefa, setNovaTarefa] = useState('')
   const [menuAberto, setMenuAberto] = useState(false)
   const [nomeNovaObra, setNomeNovaObra] = useState<string | null>(null)
+  const [erroRede, setErroRede] = useState(false)
 
   const carregar = useCallback(async () => {
     const [r, a, t] = await Promise.all([
-      supabase.from('rdos').select('*').eq('obra_id', obra.id).eq('data', hoje).maybeSingle(),
-      supabase.from('aprendizados').select('id').eq('data', hoje),
-      supabase.from('tarefas').select('*').eq('data', hoje).order('created_at'),
+      supabase
+        .from('rdos')
+        .select('*')
+        .eq('user_id', userId)
+        .eq('obra_id', obra.id)
+        .eq('data', hoje)
+        .maybeSingle(),
+      supabase.from('aprendizados').select('id').eq('user_id', userId).eq('data', hoje),
+      supabase.from('tarefas').select('*').eq('user_id', userId).eq('data', hoje).order('created_at'),
     ])
+    if (r.error || a.error || t.error) {
+      setErroRede(true)
+      return
+    }
+    setErroRede(false)
     setRdo(r.data as Rdo | null)
     setQtdAprendizados(a.data?.length ?? 0)
     setTarefas((t.data as Tarefa[]) ?? [])
-  }, [obra.id, hoje])
+  }, [userId, obra.id, hoje])
 
   useEffect(() => {
     carregar()
@@ -54,26 +66,39 @@ export default function Hoje({ userId, obra, onObraMudou, ehAdmin, onAbrirAdmin 
     const titulo = novaTarefa.trim()
     if (!titulo) return
     setNovaTarefa('')
-    await supabase.from('tarefas').insert({ titulo, data: hoje, user_id: userId })
+    const { error } = await supabase.from('tarefas').insert({ titulo, data: hoje, user_id: userId })
+    if (error) {
+      // devolve o texto para o campo: nada digitado se perde
+      setNovaTarefa(titulo)
+      setErroRede(true)
+      return
+    }
     carregar()
   }
 
   async function alternarTarefa(t: Tarefa) {
     setTarefas((ts) => ts.map((x) => (x.id === t.id ? { ...x, concluida: !x.concluida } : x)))
-    await supabase.from('tarefas').update({ concluida: !t.concluida }).eq('id', t.id)
+    const { error } = await supabase.from('tarefas').update({ concluida: !t.concluida }).eq('id', t.id)
+    if (error) carregar()
   }
 
   async function removerTarefa(id: string) {
     setTarefas((ts) => ts.filter((x) => x.id !== id))
-    await supabase.from('tarefas').delete().eq('id', id)
+    const { error } = await supabase.from('tarefas').delete().eq('id', id)
+    if (error) carregar()
   }
 
   async function criarNovaObra(e: React.FormEvent) {
     e.preventDefault()
     const nome = (nomeNovaObra ?? '').trim()
     if (!nome) return
+    // Cria a nova primeiro; se falhar, a obra atual segue intacta.
+    const { error } = await supabase.from('obras').insert({ nome, user_id: userId })
+    if (error) {
+      setErroRede(true)
+      return
+    }
     await supabase.from('obras').update({ ativa: false }).eq('id', obra.id)
-    await supabase.from('obras').insert({ nome, user_id: userId })
     setNomeNovaObra(null)
     onObraMudou()
   }
@@ -132,6 +157,15 @@ export default function Hoje({ userId, obra, onObraMudou, ehAdmin, onAbrirAdmin 
           )}
         </div>
       </header>
+
+      {erroRede && (
+        <button
+          onClick={carregar}
+          className="w-full rounded-xl border border-danger/40 bg-danger/10 px-3 py-2.5 text-sm font-medium text-danger"
+        >
+          Sem conexão — toque para tentar de novo
+        </button>
+      )}
 
       {nomeNovaObra !== null && (
         <form
