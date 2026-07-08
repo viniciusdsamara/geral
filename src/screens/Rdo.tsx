@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { diffDias, fmtDataCurta, hojeISO } from '../lib/dates'
 import { comprimirImagem } from '../lib/imagem'
+import CampoComSugestoes from '../components/CampoComSugestoes'
 import type { EfetivoItem, Obra, Rdo as RdoTipo, RdoFoto, ServicoItem } from '../lib/types'
 
 interface Props {
@@ -55,6 +56,36 @@ export default function Rdo({ userId, obra }: Props) {
   const [erroFoto, setErroFoto] = useState('')
   const cameraRef = useRef<HTMLInputElement>(null)
   const galeriaRef = useRef<HTMLInputElement>(null)
+  const [sugestoesServicos, setSugestoesServicos] = useState<string[]>([])
+  const [sugestoesFuncoes, setSugestoesFuncoes] = useState<string[]>([])
+
+  // Memória de frentes de serviço e funções: tudo que já foi usado em
+  // qualquer obra, do mais recente para o mais antigo
+  useEffect(() => {
+    ;(async () => {
+      const { data: rows, error } = await supabase
+        .from('rdos')
+        .select('servicos, efetivo')
+        .eq('user_id', userId)
+        .order('data', { ascending: false })
+        .limit(500)
+      if (error || !rows) return
+      const svs: string[] = []
+      const fns: string[] = []
+      for (const r of rows as Pick<RdoTipo, 'servicos' | 'efetivo'>[]) {
+        for (const s of r.servicos) {
+          const d = s.descricao.trim()
+          if (d && !svs.includes(d)) svs.push(d)
+        }
+        for (const f of r.efetivo) {
+          const d = f.funcao.trim()
+          if (d && !fns.includes(d)) fns.push(d)
+        }
+      }
+      setSugestoesServicos(svs)
+      setSugestoesFuncoes(fns)
+    })()
+  }, [userId])
 
   const carregarFotos = useCallback(async (id: string) => {
     const { data: rows, error } = await supabase
@@ -306,11 +337,6 @@ export default function Rdo({ userId, obra }: Props) {
 
   // Último RDO anterior à data aberta: base do "repetir equipe e serviços"
   const anterior = lista.find((r) => r.data < data)
-
-  // Descrições e funções já usadas na obra (autocomplete: mantém os nomes
-  // consistentes, o que permite acompanhar o avanço por serviço)
-  const servicosUsados = [...new Set(lista.flatMap((r) => r.servicos.map((s) => s.descricao.trim())).filter(Boolean))]
-  const funcoesUsadas = [...new Set(lista.flatMap((r) => r.efetivo.map((f) => f.funcao.trim())).filter(Boolean))]
 
   // Estado atual de cada serviço do último RDO + há quantos dias está sem avanço
   const panorama = (() => {
@@ -586,14 +612,14 @@ export default function Rdo({ userId, obra }: Props) {
         <div className="space-y-2">
           {efetivo.map((item, i) => (
             <div key={i} className="flex items-center gap-2">
-              <input
-                value={item.funcao}
-                onChange={(e) =>
-                  marcar(setEfetivo)(efetivo.map((x, j) => (j === i ? { ...x, funcao: e.target.value } : x)))
+              <CampoComSugestoes
+                valor={item.funcao}
+                onMudar={(v) =>
+                  marcar(setEfetivo)(efetivo.map((x, j) => (j === i ? { ...x, funcao: v } : x)))
                 }
+                opcoes={sugestoesFuncoes}
                 placeholder="Função (ex.: Pedreiro)"
-                list="funcoes-obra"
-                className="min-w-0 flex-1 rounded-xl border border-hairline bg-bg px-3 py-2 text-sm outline-none focus:border-accent"
+                className="min-w-0 flex-1"
               />
               <input
                 type="number"
@@ -630,14 +656,14 @@ export default function Rdo({ userId, obra }: Props) {
         <div className="space-y-2">
           {servicos.map((s, i) => (
             <div key={i} className="flex items-center gap-2">
-              <input
-                value={s.descricao}
-                onChange={(e) =>
-                  marcar(setServicos)(servicos.map((x, j) => (j === i ? { ...x, descricao: e.target.value } : x)))
+              <CampoComSugestoes
+                valor={s.descricao}
+                onMudar={(v) =>
+                  marcar(setServicos)(servicos.map((x, j) => (j === i ? { ...x, descricao: v } : x)))
                 }
+                opcoes={sugestoesServicos}
                 placeholder="Serviço (ex.: Alvenaria 2º pav.)"
-                list="servicos-obra"
-                className="min-w-0 flex-1 rounded-xl border border-hairline bg-bg px-3 py-2 text-sm outline-none focus:border-accent"
+                className="min-w-0 flex-1"
               />
               <div className="flex items-center gap-1">
                 <input
@@ -788,16 +814,6 @@ export default function Rdo({ userId, obra }: Props) {
         {salvando ? 'Salvando…' : 'Salvar RDO'}
       </button>
 
-      <datalist id="servicos-obra">
-        {servicosUsados.map((s) => (
-          <option key={s} value={s} />
-        ))}
-      </datalist>
-      <datalist id="funcoes-obra">
-        {funcoesUsadas.map((f) => (
-          <option key={f} value={f} />
-        ))}
-      </datalist>
     </div>
   )
 }
