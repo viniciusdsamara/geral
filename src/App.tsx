@@ -7,6 +7,7 @@ import Login from './screens/Login'
 import ObraSetup from './screens/ObraSetup'
 import Hoje from './screens/Hoje'
 import Rdo from './screens/Rdo'
+import Andamento from './screens/Andamento'
 import Aprendizado from './screens/Aprendizado'
 import Evolucao from './screens/Evolucao'
 import AguardandoAprovacao from './screens/AguardandoAprovacao'
@@ -164,6 +165,7 @@ export default function App() {
         />
       )}
       {aba === 'rdo' && <Rdo userId={userId} obra={obra} />}
+      {aba === 'obra' && <Andamento userId={userId} obra={obra} />}
       {aba === 'aprendizado' && <Aprendizado userId={userId} />}
       {aba === 'evolucao' && <Evolucao userId={userId} />}
       <TabBar aba={aba} onMudar={setAba} />

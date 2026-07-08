@@ -1,4 +1,4 @@
-export type Aba = 'hoje' | 'rdo' | 'aprendizado' | 'evolucao'
+export type Aba = 'hoje' | 'rdo' | 'obra' | 'aprendizado' | 'evolucao'
 
 const ABAS: { id: Aba; rotulo: string; icone: React.ReactNode }[] = [
   {
@@ -18,6 +18,17 @@ const ABAS: { id: Aba; rotulo: string; icone: React.ReactNode }[] = [
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
         <rect x="5" y="4" width="14" height="17" rx="2" />
         <path d="M9 4.5V3h6v1.5M9 10h6M9 14h6M9 18h3" />
+      </svg>
+    ),
+  },
+  {
+    id: 'obra',
+    rotulo: 'Obra',
+    icone: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+        <path d="M4 6h16" />
+        <path d="M4 12h10" />
+        <path d="M4 18h13" />
       </svg>
     ),
   },

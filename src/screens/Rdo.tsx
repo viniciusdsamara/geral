@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { supabase } from '../lib/supabase'
-import { diffDias, fmtDataCurta, hojeISO } from '../lib/dates'
+import { fmtDataCurta, hojeISO } from '../lib/dates'
 import { comprimirImagem } from '../lib/imagem'
 import CampoComSugestoes from '../components/CampoComSugestoes'
 import type { EfetivoItem, Obra, Rdo as RdoTipo, RdoFoto, ServicoItem } from '../lib/types'
@@ -338,41 +338,6 @@ export default function Rdo({ userId, obra }: Props) {
   // Último RDO anterior à data aberta: base do "repetir equipe e serviços"
   const anterior = lista.find((r) => r.data < data)
 
-  // Estado atual de cada serviço do último RDO + há quantos dias está sem avanço
-  const panorama = (() => {
-    if (lista.length === 0) return { servicos: [] as { descricao: string; avanco: number; paradoDias: number }[], homemDia: 0 }
-    const asc = [...lista].sort((a, b) => (a.data < b.data ? -1 : 1))
-    const historico = new Map<string, { data: string; avanco: number }[]>()
-    let homemDia = 0
-    for (const r of asc) {
-      homemDia += r.efetivo.reduce((s, e) => s + (e.qtd || 0), 0)
-      for (const s of r.servicos) {
-        const k = s.descricao.trim()
-        if (!k) continue
-        const arr = historico.get(k) ?? []
-        arr.push({ data: r.data, avanco: s.avanco })
-        historico.set(k, arr)
-      }
-    }
-    const ultimo = asc[asc.length - 1]
-    const servicos = ultimo.servicos
-      .filter((s) => s.descricao.trim())
-      .map((s) => {
-        const arr = historico.get(s.descricao.trim()) ?? []
-        let inicioEstagnado = ultimo.data
-        for (let i = arr.length - 2; i >= 0 && arr[i].avanco === s.avanco; i--) {
-          inicioEstagnado = arr[i].data
-        }
-        const dias = diffDias(inicioEstagnado, ultimo.data)
-        return {
-          descricao: s.descricao.trim(),
-          avanco: s.avanco,
-          paradoDias: s.avanco < 100 && arr.length > 1 && dias >= 5 ? dias : 0,
-        }
-      })
-    return { servicos, homemDia }
-  })()
-
   function repetirAnterior() {
     if (!anterior) return
     setEfetivo(anterior.efetivo)
@@ -430,41 +395,6 @@ export default function Rdo({ userId, obra }: Props) {
           <p className="pt-2 text-center text-sm text-muted">
             Os RDOs salvos aparecem aqui, um por dia.
           </p>
-        )}
-
-        {panorama.servicos.length > 0 && (
-          <section className="rounded-2xl border border-hairline bg-surface p-4">
-            <div className="mb-3 flex items-baseline justify-between">
-              <h2 className="text-sm font-semibold">Andamento da obra</h2>
-              <span className="text-xs text-muted">
-                {lista.length} RDO{lista.length > 1 ? 's' : ''} · {panorama.homemDia} homem-dia
-              </span>
-            </div>
-            <ul className="space-y-2.5">
-              {panorama.servicos.map((s) => (
-                <li key={s.descricao}>
-                  <div className="mb-1 flex items-baseline justify-between gap-2">
-                    <span className="min-w-0 truncate text-sm text-ink2">{s.descricao}</span>
-                    <span className="shrink-0 text-xs tabular-nums text-muted">
-                      {s.paradoDias > 0 && (
-                        <span className="font-medium text-danger">sem avanço há {s.paradoDias}d · </span>
-                      )}
-                      {s.avanco}%
-                    </span>
-                  </div>
-                  <div
-                    className="h-2 overflow-hidden rounded-full"
-                    style={{ background: 'color-mix(in srgb, var(--accent) 16%, var(--surface))' }}
-                  >
-                    <div
-                      className="h-full rounded-full"
-                      style={{ width: `${Math.min(100, s.avanco)}%`, background: 'var(--accent)' }}
-                    />
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </section>
         )}
 
         <div className="space-y-2">
