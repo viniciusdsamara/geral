@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
-import { fmtDataLonga, hojeISO } from '../lib/dates'
+import { addDias, diffDias, fmtDataLonga, hojeISO } from '../lib/dates'
 import type { Obra, Rdo, Tarefa } from '../lib/types'
 import ProgressRing from '../components/ProgressRing'
+import { exportarDados } from '../lib/exportar'
 
 interface Props {
   userId: string
@@ -34,6 +35,7 @@ export default function Hoje({ userId, obra, onObraMudou, ehAdmin, onAbrirAdmin 
   const [menuAberto, setMenuAberto] = useState(false)
   const [nomeNovaObra, setNomeNovaObra] = useState<string | null>(null)
   const [erroRede, setErroRede] = useState(false)
+  const [avisos, setAvisos] = useState<string[]>([])
 
   const carregar = useCallback(async () => {
     // Tarefas não concluídas de dias anteriores rolam para hoje
@@ -62,7 +64,57 @@ export default function Hoje({ userId, obra, onObraMudou, ehAdmin, onAbrirAdmin 
     setRdo(r.data as Rdo | null)
     setQtdAprendizados(a.data?.length ?? 0)
     setTarefas((t.data as Tarefa[]) ?? [])
+
+    // Avisos discretos: só informação, sem cobrança
+    const { data: todos } = await supabase
+      .from('rdos')
+      .select('data, servicos')
+      .eq('user_id', userId)
+      .eq('obra_id', obra.id)
+      .order('data')
+    const novos: string[] = []
+    if (todos && todos.length > 0) {
+      const ontem = addDias(hoje, -1)
+      const ontemFoiDomingo = new Date(`${ontem}T12:00:00`).getDay() === 0
+      const temOntem = todos.some((x) => x.data === ontem)
+      const temAnteriores = todos.some((x) => x.data < ontem)
+      if (!ontemFoiDomingo && !temOntem && temAnteriores) {
+        novos.push('O RDO de ontem ficou em branco — dá para lançar retroativo na aba RDO.')
+      }
+      const historico = new Map<string, { data: string; avanco: number }[]>()
+      for (const x of todos) {
+        for (const s of x.servicos as { descricao: string; avanco: number }[]) {
+          const k = s.descricao.trim()
+          if (!k) continue
+          const arr = historico.get(k) ?? []
+          arr.push({ data: x.data, avanco: s.avanco })
+          historico.set(k, arr)
+        }
+      }
+      const ultimaData = todos[todos.length - 1].data
+      let parados = 0
+      for (const arr of historico.values()) {
+        const ultimo = arr[arr.length - 1]
+        if (ultimo.avanco >= 100 || arr.length < 2) continue
+        let inicio = ultimo.data
+        for (let i = arr.length - 2; i >= 0 && arr[i].avanco === ultimo.avanco; i--) inicio = arr[i].data
+        if (diffDias(inicio, ultimaData) >= 5) parados++
+      }
+      if (parados > 0) {
+        novos.push(
+          parados === 1
+            ? '1 serviço está sem avanço há mais de 5 dias — veja na aba Obra.'
+            : `${parados} serviços estão sem avanço há mais de 5 dias — veja na aba Obra.`,
+        )
+      }
+    }
+    setAvisos(novos.filter((a) => !sessionStorage.getItem(`aviso-${hoje}-${a}`)))
   }, [userId, obra.id, hoje])
+
+  function dispensarAviso(a: string) {
+    sessionStorage.setItem(`aviso-${hoje}-${a}`, '1')
+    setAvisos((av) => av.filter((x) => x !== a))
+  }
 
   useEffect(() => {
     carregar()
@@ -155,6 +207,16 @@ export default function Hoje({ userId, obra, onObraMudou, ehAdmin, onAbrirAdmin 
                 Mudar de obra
               </button>
               <button
+                onClick={async () => {
+                  setMenuAberto(false)
+                  const ok = await exportarDados(userId)
+                  if (!ok) setErroRede(true)
+                }}
+                className="block w-full px-4 py-2.5 text-left text-sm"
+              >
+                Exportar dados (CSV)
+              </button>
+              <button
                 onClick={() => supabase.auth.signOut()}
                 className="block w-full px-4 py-2.5 text-left text-sm text-danger"
               >
@@ -207,6 +269,24 @@ export default function Hoje({ userId, obra, onObraMudou, ehAdmin, onAbrirAdmin 
           </div>
         </form>
       )}
+
+      {avisos.map((a) => (
+        <div
+          key={a}
+          className="flex items-start gap-2 rounded-xl border border-hairline bg-surface px-3 py-2.5"
+        >
+          <p className="flex-1 text-xs leading-relaxed text-ink2">{a}</p>
+          <button
+            onClick={() => dispensarAviso(a)}
+            aria-label="Dispensar aviso"
+            className="-mr-1 -mt-0.5 p-1 text-muted"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-3.5 w-3.5">
+              <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
+            </svg>
+          </button>
+        </div>
+      ))}
 
       <section className="rounded-2xl border border-hairline bg-surface p-4">
         <div className="flex justify-around">

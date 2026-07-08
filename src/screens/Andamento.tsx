@@ -15,6 +15,35 @@ interface Servico {
   paradoDias: number
 }
 
+function GraficoServico({ pontos }: { pontos: { data: string; avanco: number }[] }) {
+  const W = 300
+  const H = 110
+  const P = 10
+  const ts = pontos.map((p) => Date.parse(`${p.data}T12:00:00`))
+  const min = ts[0]
+  const max = ts[ts.length - 1]
+  const x = (t: number) => (max === min ? W / 2 : P + ((t - min) / (max - min)) * (W - 2 * P))
+  const y = (a: number) => H - P - (a / 100) * (H - 2 * P)
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} className="w-full">
+      {[0, 50, 100].map((v) => (
+        <line key={v} x1={P} x2={W - P} y1={y(v)} y2={y(v)} stroke="var(--hairline)" strokeWidth="1" />
+      ))}
+      <polyline
+        points={pontos.map((p, i) => `${x(ts[i])},${y(p.avanco)}`).join(' ')}
+        fill="none"
+        stroke="var(--accent)"
+        strokeWidth="2"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+      />
+      {pontos.map((p, i) => (
+        <circle key={i} cx={x(ts[i])} cy={y(p.avanco)} r="3.5" fill="var(--accent)" stroke="var(--surface)" strokeWidth="2" />
+      ))}
+    </svg>
+  )
+}
+
 function Barra({ avanco, concluido }: { avanco: number; concluido?: boolean }) {
   return (
     <div
@@ -32,10 +61,31 @@ function Barra({ avanco, concluido }: { avanco: number; concluido?: boolean }) {
   )
 }
 
+function DetalheServico({ arr }: { arr: { data: string; avanco: number }[] }) {
+  if (arr.length === 0) return null
+  const primeiro = arr[0]
+  const ultimo = arr[arr.length - 1]
+  const dias = diffDias(primeiro.data, ultimo.data)
+  return (
+    <div className="mt-2 rounded-xl border border-hairline p-3">
+      <p className="mb-2 text-xs text-muted">
+        de {primeiro.avanco}% a {ultimo.avanco}% · {arr.length} registro{arr.length > 1 ? 's' : ''}
+        {dias > 0 ? ` · ${dias} dias corridos` : ''}
+      </p>
+      <GraficoServico pontos={arr} />
+      <div className="mt-1 flex justify-between text-[10px] text-muted">
+        <span>{fmtDataCurta(primeiro.data)}</span>
+        <span>{fmtDataCurta(ultimo.data)}</span>
+      </div>
+    </div>
+  )
+}
+
 export default function Andamento({ userId, obra }: Props) {
   const [rdos, setRdos] = useState<Rdo[] | null>(null)
   const [erroRede, setErroRede] = useState(false)
   const [mostrarConcluidos, setMostrarConcluidos] = useState(false)
+  const [servicoAberto, setServicoAberto] = useState<string | null>(null)
 
   const carregar = useCallback(async () => {
     const { data, error } = await supabase
@@ -124,7 +174,11 @@ export default function Andamento({ userId, obra }: Props) {
           <h2 className="mb-3 text-sm font-semibold">Em andamento</h2>
           <ul className="space-y-3">
             {emAndamento.map((s) => (
-              <li key={s.descricao}>
+              <li
+                key={s.descricao}
+                onClick={() => setServicoAberto(servicoAberto === s.descricao ? null : s.descricao)}
+                className="cursor-pointer"
+              >
                 <div className="mb-1 flex items-baseline justify-between gap-2">
                   <span className="min-w-0 truncate text-sm text-ink2">{s.descricao}</span>
                   <span className="shrink-0 text-xs tabular-nums text-muted">
@@ -135,6 +189,7 @@ export default function Andamento({ userId, obra }: Props) {
                   </span>
                 </div>
                 <Barra avanco={s.avanco} />
+                {servicoAberto === s.descricao && <DetalheServico arr={historico.get(s.descricao) ?? []} />}
               </li>
             ))}
           </ul>
@@ -161,7 +216,11 @@ export default function Andamento({ userId, obra }: Props) {
           {mostrarConcluidos && (
             <ul className="mt-2 space-y-3 rounded-2xl border border-hairline bg-surface p-4">
               {concluidos.map((s) => (
-                <li key={s.descricao}>
+                <li
+                  key={s.descricao}
+                  onClick={() => setServicoAberto(servicoAberto === s.descricao ? null : s.descricao)}
+                  className="cursor-pointer"
+                >
                   <div className="mb-1 flex items-baseline justify-between gap-2">
                     <span className="min-w-0 truncate text-sm text-ink2">{s.descricao}</span>
                     <span className="shrink-0 text-xs text-muted">
@@ -169,6 +228,7 @@ export default function Andamento({ userId, obra }: Props) {
                     </span>
                   </div>
                   <Barra avanco={100} concluido />
+                  {servicoAberto === s.descricao && <DetalheServico arr={historico.get(s.descricao) ?? []} />}
                 </li>
               ))}
             </ul>

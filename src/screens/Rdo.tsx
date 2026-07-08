@@ -2,6 +2,8 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { fmtDataCurta, hojeISO } from '../lib/dates'
 import { comprimirImagem } from '../lib/imagem'
+import { normalizar } from '../lib/texto'
+import { gerarImagemRdo } from '../lib/rdoImagem'
 import CampoComSugestoes from '../components/CampoComSugestoes'
 import type { EfetivoItem, Obra, Rdo as RdoTipo, RdoFoto, ServicoItem } from '../lib/types'
 
@@ -54,6 +56,7 @@ export default function Rdo({ userId, obra }: Props) {
   const [erroCarregar, setErroCarregar] = useState(false)
   const [enviandoFoto, setEnviandoFoto] = useState(false)
   const [erroFoto, setErroFoto] = useState('')
+  const [compartilhando, setCompartilhando] = useState(false)
   const cameraRef = useRef<HTMLInputElement>(null)
   const galeriaRef = useRef<HTMLInputElement>(null)
   const [sugestoesServicos, setSugestoesServicos] = useState<string[]>([])
@@ -328,6 +331,7 @@ export default function Rdo({ userId, obra }: Props) {
 
   const hoje = hojeISO()
   const [dataRetro, setDataRetro] = useState<string | null>(null)
+  const [buscaRdo, setBuscaRdo] = useState('')
 
   function abrir(dia: string) {
     setData(dia)
@@ -338,10 +342,17 @@ export default function Rdo({ userId, obra }: Props) {
   // Último RDO anterior à data aberta: base do "repetir equipe e serviços"
   const anterior = lista.find((r) => r.data < data)
 
+  // Copia o RDO anterior inteiro, menos relato/ocorrências/fotos
+  // (narrativa é específica de cada dia — duplicar criaria registro falso)
   function repetirAnterior() {
     if (!anterior) return
+    setClimaManha(anterior.clima_manha)
+    setClimaTarde(anterior.clima_tarde)
+    setPraticavelManha(anterior.praticavel_manha)
+    setPraticavelTarde(anterior.praticavel_tarde)
     setEfetivo(anterior.efetivo)
     setServicos(anterior.servicos)
+    setEquipamentos(anterior.equipamentos ?? '')
     setSujo(true)
   }
 
@@ -349,6 +360,41 @@ export default function Rdo({ userId, obra }: Props) {
     if (sujo) await salvar()
     await carregarLista()
     setModo('lista')
+  }
+
+  async function compartilhar() {
+    setCompartilhando(true)
+    if (sujo) await salvar()
+    const blob = await gerarImagemRdo({
+      obraNome: obra.nome,
+      data,
+      climaManha,
+      climaTarde,
+      praticavelManha,
+      praticavelTarde,
+      efetivo,
+      servicos,
+      equipamentos,
+      ocorrencias,
+      relato,
+      fotosUrls: fotos.map((f) => f.url).filter(Boolean),
+    })
+    setCompartilhando(false)
+    if (!blob) return
+    const file = new File([blob], `rdo-${data}.jpg`, { type: 'image/jpeg' })
+    if (navigator.canShare?.({ files: [file] })) {
+      try {
+        await navigator.share({ files: [file], title: `RDO ${fmtDataCurta(data)} — ${obra.nome}` })
+      } catch {
+        // compartilhamento cancelado pelo usuário
+      }
+    } else {
+      const a = document.createElement('a')
+      a.href = URL.createObjectURL(file)
+      a.download = file.name
+      a.click()
+      URL.revokeObjectURL(a.href)
+    }
   }
 
   async function salvarEVoltar() {
@@ -373,6 +419,23 @@ export default function Rdo({ userId, obra }: Props) {
 
   if (modo === 'lista') {
     const temHoje = lista.some((r) => r.data === hoje)
+    const q = normalizar(buscaRdo.trim())
+    const camposBusca = (r: RdoTipo) =>
+      [r.relato, r.ocorrencias, r.equipamentos, ...r.servicos.map((s) => s.descricao), ...r.efetivo.map((f) => f.funcao)]
+        .filter(Boolean)
+        .join(' · ')
+    const listaExibida = q ? lista.filter((r) => normalizar(camposBusca(r)).includes(q)) : lista
+    const trecho = (r: RdoTipo) => {
+      for (const campo of [r.relato, r.ocorrencias, r.equipamentos]) {
+        if (!campo) continue
+        const pos = normalizar(campo).indexOf(q)
+        if (pos >= 0) {
+          const inicio = Math.max(0, pos - 20)
+          return `${inicio > 0 ? '…' : ''}${campo.slice(inicio, pos + 60)}`
+        }
+      }
+      return camposBusca(r).slice(0, 80)
+    }
     return (
       <div className="space-y-4">
         <header>
@@ -380,9 +443,26 @@ export default function Rdo({ userId, obra }: Props) {
           <p className="text-sm text-ink2">{obra.nome}</p>
         </header>
 
+        {lista.length > 1 && (
+          <input
+            value={buscaRdo}
+            onChange={(e) => setBuscaRdo(e.target.value)}
+            placeholder="Buscar nos relatos, ocorrências e serviços…"
+            className="w-full rounded-xl border border-hairline bg-surface px-3 py-2.5 text-sm outline-none focus:border-accent"
+          />
+        )}
+
+        {q && (
+          <p className="text-sm text-muted">
+            {listaExibida.length === 0
+              ? 'Nada encontrado.'
+              : `${listaExibida.length} RDO${listaExibida.length > 1 ? 's' : ''} encontrado${listaExibida.length > 1 ? 's' : ''}`}
+          </p>
+        )}
+
         {bannerErroCarregar}
 
-        {!temHoje && (
+        {!q && !temHoje && (
           <button
             onClick={() => abrir(hoje)}
             className="w-full rounded-2xl bg-accent py-3.5 text-sm font-semibold text-white"
@@ -398,7 +478,7 @@ export default function Rdo({ userId, obra }: Props) {
         )}
 
         <div className="space-y-2">
-          {lista.map((r) => {
+          {listaExibida.map((r) => {
             const pessoas = r.efetivo.reduce((s, e) => s + (e.qtd || 0), 0)
             const partes = [
               `${r.servicos.length} serviço${r.servicos.length === 1 ? '' : 's'}`,
@@ -421,7 +501,7 @@ export default function Rdo({ userId, obra }: Props) {
                     </span>
                   )}
                 </div>
-                <p className="mt-0.5 text-xs text-muted">{partes.join(' · ')}</p>
+                <p className="mt-0.5 text-xs text-muted">{q ? trecho(r) : partes.join(' · ')}</p>
               </button>
             )
           })}
@@ -494,7 +574,7 @@ export default function Rdo({ userId, obra }: Props) {
           onClick={repetirAnterior}
           className="w-full rounded-xl border border-hairline bg-surface px-3 py-2.5 text-sm font-medium text-accent"
         >
-          Repetir efetivo e serviços de {anterior.data === hoje ? 'hoje' : fmtDataCurta(anterior.data)}
+          Repetir RDO de {fmtDataCurta(anterior.data)} — ajuste só o que mudou
         </button>
       )}
 
@@ -742,6 +822,14 @@ export default function Rdo({ userId, obra }: Props) {
         className="w-full rounded-xl bg-accent py-3 text-sm font-semibold text-white disabled:opacity-50"
       >
         {salvando ? 'Salvando…' : 'Salvar RDO'}
+      </button>
+
+      <button
+        onClick={compartilhar}
+        disabled={compartilhando}
+        className="w-full rounded-xl border border-hairline bg-surface py-3 text-sm font-semibold text-accent disabled:opacity-50"
+      >
+        {compartilhando ? 'Gerando imagem…' : 'Compartilhar'}
       </button>
 
     </div>

@@ -1,14 +1,9 @@
 import { useMemo, useState } from 'react'
+import { normalizar } from '../lib/texto'
 
 // Campo de texto com sugestões por prefixo (estilo barra de pesquisa):
 // enquanto digita, mostra as opções já usadas que começam com as mesmas
 // letras, ignorando maiúsculas e acentos.
-function normalizar(s: string): string {
-  return s
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-}
 
 interface Props {
   valor: string
