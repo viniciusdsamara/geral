@@ -31,10 +31,12 @@ ruído, sem gamificação** — barrar features que não ajudem a evolução del
 
 ## Automação
 
-- Routine "Evolução + Resumo semanal" toda sexta 13:02 UTC (10:02 BRT), sessão
-  nova: escreve Evolução (→ RETROSPECTIVA.md), Resumo da obra
-  (→ RESUMO-SEMANAL.md) e Fechamento de obras arquivadas, sempre
-  **acrescentando, nunca reescrevendo**, e insere em `retrospectivas`.
+- Routine "Evolução + Resumo semanal" toda sexta 13:02 UTC (10:02 BRT),
+  disparando **nesta sessão persistente** (sessão nova não recebe o conector
+  do Supabase — já falhou assim em 10/07/2026): escreve Evolução
+  (→ RETROSPECTIVA.md), Resumo da obra (→ RESUMO-SEMANAL.md) e Fechamento de
+  obras arquivadas, sempre **acrescentando, nunca reescrevendo**, insere em
+  `retrospectivas` e notifica via PushNotification.
 - Os dois .md são append-only: nunca editar seções existentes.
 
 ## Convenções do app
